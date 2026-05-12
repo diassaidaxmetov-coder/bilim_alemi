@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=1.0">
+    <title>Абайдың 45 қара сөзі | Bilim Alemi</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ========== ЖАЛПЫ СТИЛЬ ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            color: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ========== ХЕДЕР ========== */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid #e0f2fe;
+        }
+
+        @media (min-width: 768px) {
+            header {
+                padding: 1rem 2rem;
+            }
+        }
+
+        .logo a {
+            color: #0284c7;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        @media (min-width: 768px) {
+            .logo a {
+                font-size: 1.5rem;
+            }
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav ul li a {
+            color: #475569;
+            text-decoration: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 0.75rem;
+            background: rgba(255,255,255,0.6);
+        }
+
+        @media (min-width: 768px) {
+            nav ul li a {
+                padding: 0.5rem 1rem;
+                font-size: 1rem;
+                border-radius: 8px;
+                background: transparent;
+            }
+        }
+
+        nav ul li a:hover {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: white;
+        }
+
+        nav ul li a.active {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: white;
+        }
+
+        /* ========== НЕГІЗГІ КОНТЕНТ ========== */
+        .qarasoz-container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        @media (min-width: 768px) {
+            .qarasoz-container {
+                margin: 50px auto;
+                padding: 0 20px;
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 24px;
+            border: 1px solid rgba(2, 132, 199, 0.2);
+        }
+
+        @media (min-width: 768px) {
+            .header {
+                margin-bottom: 40px;
+                padding: 30px;
+                border-radius: 28px;
+            }
+        }
+
+        .header h1 {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+                margin-bottom: 10px;
+            }
+        }
+
+        .header p {
+            color: #475569;
+            font-size: 0.85rem;
+        }
+
+        @media (min-width: 768px) {
+            .header p {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* ========== ҚАРА СӨЗ КАРТОЧКАЛАРЫ ========== */
+        .qarasoz-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .qarasoz-list {
+                gap: 25px;
+            }
+        }
+
+        .qarasoz-item {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            padding: 18px;
+            border: 1px solid rgba(2, 132, 199, 0.2);
+            transition: all 0.3s;
+        }
+
+        @media (min-width: 768px) {
+            .qarasoz-item {
+                border-radius: 20px;
+                padding: 25px;
+            }
+        }
+
+        .qarasoz-item:hover {
+            transform: translateX(5px);
+            border-color: #0284c7;
+            background: white;
+            box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.1);
+        }
+
+        @media (min-width: 768px) {
+            .qarasoz-item:hover {
+                transform: translateX(8px);
+            }
+        }
+
+        .qarasoz-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .qarasoz-number {
+                padding: 5px 15px;
+                font-size: 0.9rem;
+                margin-bottom: 15px;
+            }
+        }
+
+        .qarasoz-text {
+            color: #1e293b;
+            line-height: 1.5;
+            font-size: 0.85rem;
+        }
+
+        @media (min-width: 768px) {
+            .qarasoz-text {
+                line-height: 1.8;
+                font-size: 1rem;
+            }
+        }
+
+        /* ========== АРТҚА ҚАЙТУ БАТЫРМАСЫ ========== */
+        .back-btn {
+            display: block;
+            width: 180px;
+            margin: 30px auto 0;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            .back-btn {
+                width: 200px;
+                margin: 40px auto 0;
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        .back-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.4);
+        }
+
+        /* ========== ФУТЕР ========== */
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: #64748b;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 30px;
+            border-top: 1px solid #e0f2fe;
+            font-size: 0.7rem;
+        }
+
+        @media (min-width: 768px) {
+            footer {
+                padding: 1.5rem;
+                margin-top: 30px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo"><a href="index.html">🎓 Bilim Alemi</a></div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Басты бет</a></li>
+            <li><a href="kazak_tili.html">Қазақ тілі</a></li>
+            <li><a href="tarih.html">Ұлттық тарих</a></li>
+            <li><a href="game.html">Ойындар</a></li>
+            <li><a href="about.html">📖 Біз туралы</a></li>
+            <li><a href="profile.html">👤 Жеке кабинет</a></li>
+            <li><a href="contact.html">Байланыс</a></li>
+            <li><a href="test.html">📝 ҰБТ тест</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="qarasoz-container">
+    <div class="header">
+        <h1> 📚 <span class="hero-title-text">Абайдың 45 қара сөздері</span></h1>
+        <p>Ұлы ақынның нақыл сөздері - халық даналығының асыл қазынасы</p>
+    </div>
+
+    <div class="qarasoz-list">
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">1-қара сөз</div>
+            <div class="qarasoz-text">Өлсе, өлер табиғат, өлмес бірақ артында – өсиет деген ат. Әрбір адам өз артында өшпес із қалдыруға тырысуы керек. Білімді адамның сөзі өлмейді, халық арасында таралып, ұрпақтан ұрпаққа жалғасады.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">2-қара сөз</div>
+            <div class="qarasoz-text">Балам, сенің бір ғана өмірің бар. Оны пайдалы іспен өткіз. Оқу, білім – адамзаттың ең асыл қазынасы. Білімсіз адам – тұлпардан жаман, өйткені ол өзін-өзі тани алмайды, өз қадірін білмейді. Білімді адамның көзі ашық, ойы кемел.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">3-қара сөз</div>
+            <div class="qarasoz-text">Адамның адамшылығы – ақыл, ғылым, жақсы атақ. Осы үшеуі болмаса, адамның адамнан айырмасы қалмайды. Ақыл – адамның ең басты байлығы. Ақылсыз адам – малмен тең. Адам атаулы ақылды болуға тырысуы керек.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">4-қара сөз</div>
+            <div class="qarasoz-text">Малдың жақсысы – ақылдысы, адамның жақсысы – білімдісі. Мал ақылды болса, табылады. Адам білімді болса, жетіледі. Білім адамды дүниеге танытады, қадірін арттырады. Білім – көз, көрмесең – көксерсің.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">5-қара сөз</div>
+            <div class="qarasoz-text">Адамзаттың көп қателігі – өз білгеніне өзі сенбейді. Бірақ білмегенін білемін деп мақтанады. Әр істің басы – ақыл. Ақылды іске асырмасаң, ол тек қиял болып қалады. Өз білгеніңе сен, бірақ білмегеніңді де үйренуге тырыс.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">6-қара сөз</div>
+            <div class="qarasoz-text">Ғылым – білу, өнер – істеу. Екеуі қосылса, адам жетіледі. Бірақ көп адам білуді де, істеуді де бірдей көрмейді. Кейбіреулер біледі, бірақ істемейді. Кейбіреулер істейді, бірақ білмейді. Екеуін қатар алып жүрген адам ғана шынайы жетістікке жетеді.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">7-қара сөз</div>
+            <div class="qarasoz-text">Байлық – ақылда, ақыл – білімде. Білімсіз ақыл да, ақылсыз байлық та – ешнәрсеге тұрмайды. Ақылды адам байлықты дұрыс пайдаланады, ал ақылсыз адам байлықты тек босқа шашады. Байлықтың мәні – оны ақылмен жұмсауда.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">8-қара сөз</div>
+            <div class="qarasoz-text">Досыңды сынамақ болсаң, үш нәрсеге сына: бірі – қуанышта, екінші – қайғыда, үшінші – байлықта. Қуанышта сенімен бірге қуанатын, қайғыда қасыңнан табылатын, байлықта сараң болмайтын адам – шынайы дос. Досыңды тастама, ол – ең үлкен байлық.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">9-қара сөз</div>
+            <div class="qarasoz-text">Адамның жақсысы – жақсылармен бірге жүреді. Жаманның жақыны – жаманның өзі. Өзін-өзі танымаған адам – надан. Надан адам өз қатесін көрмейді, бірақ басқаның қатесін тез байқайды. Өзін тану – ең қиын іс. Ал адам ең алдымен өзін тануы керек.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">10-қара сөз</div>
+            <div class="qarasoz-text">Еңбек етпей табылған малдың берекеті болмайды. Берекетсіз малдан берекелі еңбек артық. Еңбек ету – адамды асыл етеді. Жалқау адам ешқашан байымайды, тіпті байыса да, байлығын сақтай алмайды. Тек еңбек еткен адам ғана шынайы байлыққа ие болады.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">11-қара сөз</div>
+            <div class="qarasoz-text">Білімдіден шыққан сөз – білмеске жол көрсетеді. Білместің сөзі – өзін-өзі алдау. Білімді адам сөйлегенде, оның сөзінде мән бар. Ол сөзімен басқаларды үйретеді, өнеге көрсетеді. Ал надан адам сөйлеп, өз білмегенін білемін деп, тек өзін масқара етеді.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">12-қара сөз</div>
+            <div class="qarasoz-text">Адамның байлығы – ақыл-парасаты. Ақыл-парасат болмаса, байлықтың да мәні жоқ. Ақыл-парасатсыз байлық – адамның жауы. Ол адамды масайтады, тәкаппарландырады. Ақыл-парасат – адамды шынайы биікке көтеретін қасиет.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">13-қара сөз</div>
+            <div class="qarasoz-text">Жақсы адам – жақсы сөзді тыңдайды. Жаман адам – жаман сөзге ереді. Адам өз сөзімен танылады. Сөздің қадірін білген адам – ақылды. Сөздің қадірін білмеген адам – надан. Жақсы сөз – жанға дауа, жаман сөз – жанға у.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">14-қара сөз</div>
+            <div class="qarasoz-text">Қуаныш та, қайғы да – уақытша. Олар мәңгі емес. Сондықтан қатты қуанба, қатты қайғырма. Өмірде барлығы өтеді. Тек жақсы істер ғана мәңгі қалады. Қуанышқа мас болма, қайғыға желікпе. Орташа жолды ұстан.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">15-қара сөз</div>
+            <div class="qarasoz-text">Адамдардың ең бақыттысы – білімдісі. Білімсіз байлықтан, білімді кедейлік артық. Білімді адам кедей болса да, ол бай адамнан артық. Себебі оның байлығы – білімінде. Білім – ешкім тартып ала алмайтын байлық.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">16-қара сөз</div>
+            <div class="qarasoz-text">Қызмет қылма, қиянат қылма. Адал бол, шыншыл бол. Сол үшін халық сені сүйеді. Адам адалдықтан айнымауы керек. Өтірік сөйлеу – үлкен кемшілік. Шындық әрқашан да жеңеді. Адал адам ешқашан жамандыққа ұшырамайды.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">17-қара сөз</div>
+            <div class="qarasoz-text">Дұшпаныңның күшіне сенбе, өз күшіңе сен. Өз күшің – білімің. Білімді адам ешкімнен қорықпайды. Ол кез келген қиындықты жеңе алады. Өз күшіңе сенбесең, ешбір іс алға баспайды. Сенім – табыстың кілті.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">18-қара сөз</div>
+            <div class="qarasoz-text">Ата-анаңды сыйла, олардың айтқанын тыңда. Олар саған жамандық тілемейді. Ата-ана – адамның ең жақын досы. Олар сен үшін өз өмірлерін қиюға дайын. Сондықтан олардың айтқанын тыңда, оларды қартаңда қара, сыйла.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">19-қара сөз</div>
+            <div class="qarasoz-text">Жақсы сөз – жанға шипа. Жаман сөз – жанға у. Сондықтан сөйлер сөзіңді ойлап сөйле. Сөз – өнер. Сөйлей білу – үлкен өнер. Бір жаман сөз адамды жылатып, бір жақсы сөз адамды күлдіреді. Сөздің қадірін біл.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">20-қара сөз</div>
+            <div class="qarasoz-text">Өзіңді біл, өзіңе сен. Сенім болмаса, ешбір іс алға баспайды. Өзіңе сенбеген адам – мықты емес. Өзіңе сен, өз күшіңе сен. Сенімің болса, кез келген қиындықты жеңесің. Өзіңді білмеген адам – жоғалған адам.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">21-қара сөз</div>
+            <div class="qarasoz-text">Адамның көркі – мінез. Мінезі жақсының сөзі де жақсы, ісі де жақсы. Мінез – адамның айнасы. Мінезі жақсы адамды барлығы сүйеді, құрметтейді. Мінезі жаман адамнан барлығы қашады. Мінезіңді түзе, сонда бәрі түзеледі.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">22-қара сөз</div>
+            <div class="qarasoz-text">Уақыт – өте қымбат дүние. Оны босқа өткізбе. Өткен уақытты қайтара алмайсың. Уақытты тиімді пайдалан. Оқуға, еңбекке, жақсы істерге жұмса. Бос сөзбен, бос әрекетпен уақытыңды өткізбе. Уақыт – өмір. Өміріңді қадірле.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">23-қара сөз</div>
+            <div class="qarasoz-text">Біреуге қарап адам болма, өзің адам болуға тырыс. Өз жолыңды өзің таңда. Басқалардың көшірмесі болма. Өз қабілетіңді дамыт. Өз ерекшелігіңді таныт. Тек өзіңе тән қасиеттеріңді аша біл. Сонда ғана шынайы адам боласың.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">24-қара сөз</div>
+            <div class="qarasoz-text">Үйрену – өмірдің мәні. Үйренбейтін адам – өмірден қалып қояды. Әр адам үнемі оқып, үйреніп отыруы керек. Өйткені дүние тұрып тұрған жоқ, ол дамып, өзгеріп отырады. Осы өзгерістерден қалмау үшін үнемі ізденіп, білім алып отыру қажет.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">25-қара сөз</div>
+            <div class="qarasoz-text">Ашу – дұшпан. Ашуланбауға тырыс. Ашуды баса біл. Ашу адамды ақылсыз етеді. Ашу кезінде адамның көзі көрмейді, құлағы естімейді, ақыл-ойы жұмыс істемейді. Ашуды баса білген адам – батыр. Ашуға ерік берме, оны басқар.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">26-қара сөз</div>
+            <div class="qarasoz-text">Кішіпейіл бол. Өзін-өзі мақтаған адамды ешкім сүймейді. Кішіпейілділік – адамның ең жақсы қасиеттерінің бірі. Кішіпейіл адамды барлығы құрметтейді. Ал мақтаншақ адам барлығының көзіне түседі. Өз жетістіктеріңмен мақтанба, тек еңбегіңмен көрін.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">27-қара сөз</div>
+            <div class="qarasoz-text">Бірлік болмаса, тірлік болмас. Біріккен жерде жеңіс бар. Бірлік – мызғымас қамал. Біріккен халықты ешкім жеңе алмайды. Адамдар бір-бірімен тату болуы керек. Татулық болса, береке болады. Береке болса, байлық болады. Бірлік – бақыттың кілті.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">28-қара сөз</div>
+            <div class="qarasoz-text">Әр нәрсенің өз уақыты бар. Уақытымен істелген іс – нәтижелі. Асығыстық – ақылсыздық. Әр істі өз уақытында, асықпай, ойланып істеу керек. Ерте істелген іс те жақсы емес, кеш істелген іс те жақсы емес. Бәрінің уақыты бар. Сол уақытты күте білу керек.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">29-қара сөз</div>
+            <div class="qarasoz-text">Адамды сыртынан емес, ішінен бағала. Көркімен емес, жүрегімен. Сыртқы көрініс – алдамшы. Көп адамның сырты әдемі болғанымен, іші – қара. Ал кейбіреулердің сырты қарапайым, бірақ іші – алтын. Адамды оның мінезімен, қасиетімен, жүрегімен бағалау керек.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">30-қара сөз</div>
+            <div class="qarasoz-text">Қиындықтан қорықпа. Қиындық – адамды шыңдайтын ұстаз. Қиындықсыз өмір болмайды. Қиындықтар арқылы адам тәжірибе жинақтайды, шыңдалады, ер жетеді. Қиындықтан қашқан адам ешқашан жетістікке жете алмайды. Қиындықтарды жеңе білу керек.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">31-қара сөз</div>
+            <div class="qarasoz-text">Жақсылық жасасаң, жақсылық көресің. Өзгеге қалай қарасаң, өзіңе де солай қарайды. Адамдарға істеген ізгілігің өзіңе қайта оралады. Көмектескен адамға көмек келеді. Қиыншылықта қалған адамға көмектес, сонда сен де қиналғанда көмек аласың.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">32-қара сөз</div>
+            <div class="qarasoz-text">Ақылды адам – үндемейді, көп тыңдайды. Ақылсыз адам – көп сөйлейді, аз тыңдайды. Ақылды адам тыңдауды біледі. Ол білмегенін үйренуге тырысады. Ал ақылсыз адам көп сөйлеп, көп қателеседі. Тыңдауды үйрен – сонда көп нәрсеге жетесің.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">33-қара сөз</div>
+            <div class="qarasoz-text">Жалқаулық – адамның ең үлкен дұшпаны. Жалқау ешқашан табысқа жетпейді. Жалқау адам әрқашан кешігеді, ешнәрсеге үлгермейді, үнемі сылтау іздейді. Ол өз күшіне сенбейді. Жалқаулықты жеңу үшін ерік-жігер керек. Еңбек ету – жалқаулықтан айығудың ең жақсы жолы.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">34-қара сөз</div>
+            <div class="qarasoz-text">Өтірік сөйлеу – үлкен кемшілік. Шындық әрқашан да жеңеді. Өтірікші адам ерте ме, кеш пе әшкере болады. Өтіріктің аяғы қара болады. Өтірік сөйлеген адам өз беделін түсіреді, адамдар оған сенбейді. Шындықты айтудан қорықпа. Шындық – ең мықты қару.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">35-қара сөз</div>
+            <div class="qarasoz-text">Денсаулық – зор байлық. Денсаулықты сақтау – әр адамның міндеті. Дені сау адам ғана толыққанды өмір сүре алады. Денсаулықты күту керек. Таза ауа, таза су, таза тамақ – денсаулықтың негізі. Спортпен шұғылдану да денсаулыққа пайдалы. Денсаулық – бәрінен қымбат.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">36-қара сөз</div>
+            <div class="qarasoz-text">Табиғатты аяла. Ол – сенің анаң. Табиғатсыз өмір жоқ. Табиғат – біздің байлығымыз. Табиғатты ластау – өз өмірімізді қысқарту. Орманды кеспе, суды былғама, ауаны ластама. Табиғатты қорғау – әр адамның міндеті. Келешек ұрпаққа таза табиғат қалдыруымыз керек.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">37-қара сөз</div>
+            <div class="qarasoz-text">Қарыздан аулақ бол. Қарыз – адамның арқанын сындыратын жүк. Қарыз адамды қор етеді. Қарыздан құтылу үшін адам әр түрлі адал емес жолдарға барады. Қарыз адамның намысына тиеді. Ақшаңды есептей біл. Қарызға түсіп қалсаң, оны тезірек қайтаруға тырыс. Қарызсыз өмір сүрген жақсы.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">38-қара сөз</div>
+            <div class="qarasoz-text">Әр адам өз ісінің шебері болуға тырысуы керек. Шебердің қолы – алтын. Өз ісін жақсы білетін адамнын бәрі құрметтейді. Шебер адам ешқашан жұмыссыз қалмайды. Ол әрқашан сұранысқа ие болады. Сондықтан әрбір адам өз мамандығын жетік меңгеруі керек.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">39-қара сөз</div>
+            <div class="qarasoz-text">Кешірімді бол. Кешіре білу – адамның үлкен қасиеті. Кешіре білген адам жауын досқа айналдыра алады. Кешірімділік – адамды жоғары қоятын қасиет. Кек сақтау – адамның жанын улайды. Кешіре білу – жеңілдік әкеледі. Кешіре білген адам – мықты адам.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">40-қара сөз</div>
+            <div class="qarasoz-text">Өз кемшілігіңді көр, оны түзетуге тырыс. Басқаның кемшілігін іздеп жүрме. Өзінің кемшілігін көрмеген адам – ақымақ. Өз кемшілігін түзетуге тырысқан адам – дана. Басқаның кемшілігін іздеп, сынау – жаман әдет. Ең алдымен, өзіңнің кемшіліктеріңмен күрес.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">41-қара сөз</div>
+            <div class="qarasoz-text">Болашаққа сеніммен қара. Ертеңгі күн бүгінгіден жақсы болады деп үміттен. Үмітсіз адам өмір сүре алмайды. Болашаққа сенім – адамды алға жетелейді. Қиындықтар уақытша, олар өтеді. Сенімді бол, үмітті бол. Ертеңгі күн жақсы болады. Өзіңе сен, болашағыңа сен.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">42-қара сөз</div>
+            <div class="qarasoz-text">Қайрат, ақыл, жүрек – үшеуі біріккенде ғана адам жетіледі. Үшеуі бөлек болса, ешбір нәтиже болмайды. Қайрат – іске асырады, ақыл – бағыт береді, жүрек – сезіммен үйлестіреді. Осы үшеуі біріккенде ғана адам керемет нәтижеге жетеді. Осы үш қасиетті дамыту керек.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">43-қара сөз</div>
+            <div class="qarasoz-text">Атаңның баласы болма, адамның баласы бол. Адамдық қасиеттерді бойыңа жина. Ата-тегіңмен мақтанба, өз ісіңмен мақтан. Адамды тек өз еңбегі, өз білімі, өз мінезі бағалайды. Атаңның байлығы сенің байлығың емес. Өз байлығыңды, өз атыңды өзің жасауың керек.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">44-қара сөз</div>
+            <div class="qarasoz-text">Өмірде ең қиыны – өзін-өзі жеңу. Өзін жеңген адам – батыр. Адамның ең үлкен жауы – өзі. Өзінің жалқаулығын, ашуын, ұрысты, надандығын жеңе білу керек. Өзін-өзі жеңген адам кез келген қиындықты жеңеді. Өзін-өзі басқара білу – ең үлкен өнер.</div>
+        </div>
+        <div class="qarasoz-item">
+            <div class="qarasoz-number">45-қара сөз</div>
+            <div class="qarasoz-text">Аллаға шүкір, адамның адамдығы – ақылда. Ақылмен өмір сүрсең, бақытты боласың. Адамға берілген ең үлкен сый – ақыл. Осы ақылды дұрыс пайдалана білу керек. Ақыл – бақыттың кілті. Ақылмен өмір сүрген адам ешқашан қателеспейді, әрқашан дұрыс жол табады. Ақылды бол, бақытты бол.</div>
+        </div>
+    </div>
+
+    <button class="back-btn" onclick="goBackToHistory()">← Артқа қайту</button>
+</div>
+
+<footer>
+    <p>&copy; 2025 Bilim Alemi. Барлық құқықтар қорғалған.</p>
+</footer>
+
+<script>
+    function goBackToHistory() {
+        if (document.referrer && document.referrer.includes('tarih.html')) {
+            window.history.back();
+        } else {
+            window.location.href = 'tarih.html';
+        }
+    }
+</script>
+
+</body>
+</html>

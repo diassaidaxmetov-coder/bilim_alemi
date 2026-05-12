@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=1.0">
+    <title>Қазақ тілі | Bilim Alemi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            font-family: 'Inter', sans-serif;
+            color: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid #e0f2fe;
+        }
+
+        .logo a {
+            color: #0284c7;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-links li a {
+            color: #475569;
+            text-decoration: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 0.8rem;
+            background: rgba(255,255,255,0.6);
+        }
+
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: white;
+        }
+
+        @media (min-width: 768px) {
+            .logo a { font-size: 1.5rem; }
+            .nav-links li a { padding: 0.5rem 1rem; font-size: 1rem; border-radius: 8px; background: transparent; }
+            header { padding: 1rem 2rem; }
+        }
+
+        .right-section { display: flex; align-items: center; gap: 10px; }
+        .profile-dropdown { position: relative; display: inline-block; }
+        .profile-icon {
+            width: 38px; height: 38px;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.3s; color: white; font-size: 1.2rem; font-weight: bold;
+        }
+        @media (min-width: 768px) { .profile-icon { width: 45px; height: 45px; font-size: 1.5rem; } }
+        .profile-icon:hover { transform: scale(1.05); box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4); }
+        .dropdown-menu {
+            position: absolute; top: 45px; right: 0; background: white; border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); width: 170px; opacity: 0; visibility: hidden;
+            transform: translateY(-10px); transition: all 0.3s ease; z-index: 100; border: 1px solid #e2e8f0;
+        }
+        @media (min-width: 768px) { .dropdown-menu { top: 55px; width: 200px; } }
+        .profile-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu a {
+            display: flex; align-items: center; gap: 10px; padding: 10px 15px; color: #1e293b;
+            text-decoration: none; transition: all 0.3s; border-radius: 8px; font-size: 0.85rem;
+        }
+        @media (min-width: 768px) { .dropdown-menu a { padding: 12px 20px; gap: 12px; font-size: 1rem; } }
+        .dropdown-menu a:hover { background: #f1f5f9; color: #0284c7; }
+        .dropdown-menu hr { margin: 5px 0; border-color: #e2e8f0; }
+
+        .main-container {
+            flex: 1; max-width: 1400px; margin: 0 auto; padding: 1rem;
+            width: 100%; display: grid; grid-template-columns: 1fr; gap: 1rem;
+        }
+        @media (min-width: 880px) { .main-container { grid-template-columns: 260px 1fr; gap: 2rem; padding: 2rem 1.5rem; } }
+
+        .sidebar-menu {
+            background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); border-radius: 24px;
+            padding: 1rem; border: 1px solid rgba(2, 132, 199, 0.2); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+        }
+        @media (min-width: 880px) { .sidebar-menu { padding: 1.5rem 0.8rem; position: sticky; top: 100px; height: fit-content; } }
+        .sidebar-menu h3 {
+            font-size: 1rem; padding: 0 0.5rem 0.8rem 0.5rem;
+            border-bottom: 2px solid #bae6fd; margin-bottom: 0.8rem; color: #0284c7;
+        }
+        @media (min-width: 880px) { .sidebar-menu h3 { font-size: 1.2rem; padding: 0 1rem 1rem 1rem; } }
+        .sidebar-nav {
+            list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;
+        }
+        @media (min-width: 880px) { .sidebar-nav { flex-direction: column; gap: 0.5rem; } }
+        .sidebar-nav li a {
+            display: block; padding: 0.5rem 0.8rem; border-radius: 18px; color: #1e293b;
+            text-decoration: none; font-weight: 500; transition: all 0.25s;
+            background: rgba(255, 255, 255, 0.5); font-size: 0.85rem; white-space: nowrap;
+        }
+        @media (min-width: 880px) { .sidebar-nav li a { padding: 0.75rem 1rem; font-size: 1rem; white-space: normal; } }
+        .sidebar-nav li a:hover { background: linear-gradient(135deg, #0284c7, #38bdf8); color: white; transform: translateX(5px); }
+
+        .content-right { width: 100%; }
+        .hero-section {
+            background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(12px); border-radius: 32px;
+            padding: 1.5rem; margin-bottom: 1.5rem; text-align: center; border: 1px solid rgba(2, 132, 199, 0.25);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+        }
+        @media (min-width: 768px) { .hero-section { padding: 2rem; margin-bottom: 2rem; border-radius: 48px; } }
+        .hero-section h1 {
+            font-size: 1.6rem; background: linear-gradient(135deg, #0284c7, #38bdf8);
+            -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 0.5rem;
+        }
+        @media (min-width: 768px) { .hero-section h1 { font-size: 2.5rem; } }
+        .hero-section p { color: #334155; font-size: 0.9rem; max-width: 600px; margin: 0 auto; }
+        @media (min-width: 768px) { .hero-section p { font-size: 1.1rem; } }
+
+        .cards-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; align-items: start; }
+        @media (min-width: 768px) { .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
+        @media (min-width: 1024px) { .cards-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
+        .topic-card.hero-card {
+            grid-column: span 1;
+            background: linear-gradient(125deg, rgba(255,255,255,0.94), rgba(224,242,254,0.92));
+            border-left: 6px solid #0284c7;
+        }
+        @media (min-width: 768px) { .topic-card.hero-card { grid-column: span 2; } }
+        .topic-card.hero-card h3 { font-size: 1.4rem; }
+        @media (min-width: 768px) { .topic-card.hero-card h3 { font-size: 1.8rem; } }
+        .topic-card {
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); border-radius: 20px;
+            padding: 1.2rem; transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid rgba(2, 132, 199, 0.2); cursor: pointer; position: relative; overflow: hidden;
+        }
+        .topic-card:hover { transform: translateY(-5px); border-color: #0284c7; background: rgba(255, 255, 255, 0.96); box-shadow: 0 20px 35px rgba(0, 0, 0, 0.08); }
+        .topic-card h3 { background: linear-gradient(135deg, #0284c7, #38bdf8); -webkit-background-clip: text; background-clip: text; color: transparent; font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .topic-card p { color: #475569; font-size: 0.75rem; }
+        @media (min-width: 768px) { .topic-card h3 { font-size: 1.4rem; } .topic-card p { font-size: 0.85rem; } }
+        .group-label {
+            margin-top: 1rem; margin-bottom: 0.75rem; font-weight: 700; font-size: 0.7rem;
+            text-transform: uppercase; letter-spacing: 1px; color: #0284c7; display: inline-block;
+            background: rgba(255,255,240,0.6); padding: 0.2rem 0.8rem; border-radius: 50px;
+        }
+        .section-group { margin-bottom: 1.5rem; }
+        footer {
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); color: #64748b;
+            text-align: center; padding: 1rem; margin-top: 1.5rem; border-top: 1px solid #e0f2fe; font-size: 0.7rem;
+        }
+        @media (min-width: 768px) { footer { padding: 1.5rem; margin-top: 2rem; font-size: 1rem; } }
+
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: white; border-radius: 24px; max-width: 900px; width: 95%; max-height: 85vh; overflow-y: auto; padding: 20px; position: relative; border: 1px solid rgba(2, 132, 199, 0.3); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2); animation: modalFadeIn 0.3s ease; }
+        @media (min-width: 768px) { .modal-content { width: 90%; padding: 30px; border-radius: 28px; } }
+        @keyframes modalFadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e0f2fe; padding-bottom: 12px; margin-bottom: 15px; }
+        .modal-header h2 { background: linear-gradient(135deg, #0284c7, #38bdf8); -webkit-background-clip: text; background-clip: text; color: transparent; font-size: 1.3rem; }
+        .close-modal { background: #e2e8f0; border: none; font-size: 24px; cursor: pointer; width: 35px; height: 35px; border-radius: 50%; transition: all 0.3s; }
+        .rule-box { background: #f0f9ff; border-left: 4px solid #0284c7; padding: 15px; margin: 15px 0; border-radius: 12px; }
+        .grammar-item { background: #f0f9ff; border-left: 4px solid #0284c7; padding: 15px; margin: 12px 0; border-radius: 12px; }
+        .grammar-item h4 { color: #0284c7; margin-bottom: 8px; font-size: 1.1rem; }
+        .word-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin: 15px 0; }
+        .word-item { background: #f0f9ff; padding: 10px; border-radius: 10px; text-align: center; transition: all 0.2s; font-size: 0.85rem; }
+        .word-item:hover { background: #e0f2fe; transform: translateX(5px); }
+        .proverb-card { background: #f0fdf4; border-radius: 16px; padding: 15px; margin: 10px 0; transition: all 0.2s; border: 1px solid #bbf7d0; }
+        .proverb-card:hover { background: #dcfce7; transform: translateX(6px); }
+        .proverb-text { font-size: 1.1rem; color: #0284c7; font-style: italic; }
+        .proverb-meaning { color: #64748b; font-size: 0.85rem; margin-top: 8px; }
+
+        /* Флэш-карта стильдері */
+        .flashcard-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .flashcard {
+            width: 100%;
+            min-height: 250px;
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(2, 132, 199, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .flashcard:hover { transform: scale(1.02); box-shadow: 0 25px 40px -12px rgba(2, 132, 199, 0.3); }
+        .flashcard-inner {
+            width: 100%;
+            padding: 40px 20px;
+            transition: all 0.3s;
+        }
+        .flashcard-word-kz { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #0284c7, #38bdf8); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 15px; }
+        .flashcard-word-ru { font-size: 1.2rem; color: #64748b; display: none; }
+        .flashcard.flipped .flashcard-word-kz { display: none; }
+        .flashcard.flipped .flashcard-word-ru { display: block; font-size: 2rem; font-weight: 600; color: #0284c7; }
+        .flashcard-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .flashcard-progress {
+            background: #e2e8f0;
+            border-radius: 20px;
+            height: 8px;
+            flex: 2;
+            min-width: 100px;
+            overflow: hidden;
+        }
+        .flashcard-progress-fill {
+            background: linear-gradient(90deg, #0284c7, #38bdf8);
+            width: 0%;
+            height: 100%;
+            border-radius: 20px;
+            transition: width 0.3s;
+        }
+        .flashcard-counter { color: #64748b; font-size: 0.9rem; }
+        .flashcard-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .card-btn {
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        .btn-know { background: #10b981; color: white; }
+        .btn-know:hover { background: #059669; transform: scale(1.05); }
+        .btn-repeat { background: #f59e0b; color: white; }
+        .btn-repeat:hover { background: #d97706; transform: scale(1.05); }
+        .btn-flip { background: #3b82f6; color: white; }
+        .btn-flip:hover { background: #2563eb; transform: scale(1.05); }
+        .reset-btn { background: #ef4444; color: white; padding: 8px 20px; }
+        .reset-btn:hover { background: #dc2626; }
+        .congrats-message {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 15px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .chat-button { position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: linear-gradient(135deg, #0284c7, #38bdf8); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4); transition: all 0.3s ease; z-index: 1000; animation: pulse 2s infinite; }
+        @media (min-width: 768px) { .chat-button { bottom: 30px; right: 30px; width: 65px; height: 65px; } }
+        @keyframes pulse { 0%,100% { box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4); } 50% { box-shadow: 0 4px 25px rgba(2, 132, 199, 0.7); } }
+        .chat-button:hover { transform: scale(1.1); }
+        .chat-window { position: fixed; bottom: 80px; right: 20px; left: 20px; width: auto; height: 450px; background: white; border-radius: 24px; display: flex; flex-direction: column; overflow: hidden; z-index: 1000; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s ease; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); }
+        @media (min-width: 768px) { .chat-window { bottom: 110px; right: 30px; left: auto; width: 380px; height: 550px; border-radius: 28px; } }
+        .chat-window.open { opacity: 1; visibility: visible; transform: translateY(0); }
+        .chat-header { background: linear-gradient(135deg, #0284c7, #38bdf8); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; color: white; }
+        .close-chat { background: rgba(255,255,255,0.2); border: none; color: white; font-size: 1.1rem; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; }
+        .chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; background: #f8fafc; }
+        .message { max-width: 85%; padding: 8px 12px; border-radius: 18px; font-size: 0.8rem; }
+        .message.user { background: linear-gradient(135deg, #0284c7, #38bdf8); color: white; align-self: flex-end; }
+        .message.bot { background: #e2e8f0; color: #1e293b; align-self: flex-start; }
+        .chat-input-container { display: flex; padding: 10px; gap: 8px; border-top: 1px solid #e2e8f0; background: white; }
+        .chat-input-container input { flex: 1; padding: 8px 12px; border-radius: 30px; border: 1px solid #cbd5e1; outline: none; font-size: 0.85rem; }
+        .send-btn { background: linear-gradient(135deg, #0284c7, #38bdf8); border: none; border-radius: 50%; width: 36px; cursor: pointer; color: white; font-size: 1rem; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo"><a href="index.html">🎓 Bilim Alemi</a></div>
+    <ul class="nav-links">
+        <li><a href="index.html">Басты бет</a></li>
+        <li><a href="kazak_tili.html" class="active">Қазақ тілі</a></li>
+        <li><a href="tarih.html">Ұлттық тарих</a></li>
+        <li><a href="game.html">Ойындар</a></li>
+        <li><a href="about.html">📖 Біз туралы</a></li>
+        <li><a href="test.html">📝 ҰБТ тест</a></li>
+    </ul>
+    <div class="right-section">
+        <div class="profile-dropdown">
+            <div class="profile-icon">👤</div>
+            <div class="dropdown-menu">
+                <a href="profile.html">👤 Жеке кабинет</a>
+                <a href="contact.html">📞 Байланыс</a>
+                <hr>
+                <a href="login.html">🔐 Кіру</a>
+                <a href="register.html">📝 Тіркелу</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="main-container">
+    <aside class="sidebar-menu">
+        <h3>📚 Бөлімдер</h3>
+        <ul class="sidebar-nav">
+            <li><a href="#" onclick="openModal('grammar'); return false;">📖 Грамматика</a></li>
+            <li><a href="#" onclick="openModal('dictionary'); return false;">📚 Сөздік қор</a></li>
+            <li><a href="#" onclick="openModal('phrases'); return false;">💬 Тұрақты тіркестер</a></li>
+            <li><a href="#" onclick="openModal('family'); return false;">👨‍👩‍👧‍👦 Отбасы</a></li>
+            <li><a href="#" onclick="openModal('proverbs'); return false;">📜 Мақал-мәтелдер</a></li>
+            <li><a href="#" onclick="openModal('flashcards'); return false;">🃏 Флэш-карталар</a></li>
+        </ul>
+    </aside>
+
+    <div class="content-right">
+        <div class="hero-section">
+            <h1>📖 Қазақ тілін үйренейік!</h1>
+            <p>Ана тілімізді құрметтеп, интерактивті карточкалар арқылы біліміңізді шыңдаңыз</p>
+        </div>
+
+        <div class="section-group">
+            <div class="group-label">📘 Негізгі бөлімдер</div>
+            <div class="cards-grid">
+                <div class="topic-card hero-card" onclick="openModal('grammar')"><h3>📖 Грамматика</h3><p>Қазақ тілінің грамматикалық ережелері: үндестік заңы, септіктер, етістік шақтары, сөз таптары, сөйлем мүшелері</p></div>
+                <div class="topic-card" onclick="openModal('dictionary')"><h3>📚 Сөздік қор</h3><p>40+ күнделікті қолданыстағы сөздер</p></div>
+                <div class="topic-card" onclick="openModal('phrases')"><h3>💬 Тұрақты тіркестер</h3><p>20+ фразеологизмдер мағынасымен</p></div>
+                <div class="topic-card" onclick="openModal('family')"><h3>👨‍👩‍👧‍👦 Отбасы</h3><p>Туыстық атаулар және отбасылық дәстүрлер</p></div>
+                <div class="topic-card" onclick="openModal('proverbs')"><h3>📜 Мақал-мәтелдер</h3><p>Халық даналығынан 13 үлгілер</p></div>
+                <div class="topic-card" onclick="openModal('flashcards')"><h3>🃏 Флэш-карталар</h3><p>Сөздік қорды жаттауға арналған карточкалар</p></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 Bilim Alemi. Барлық құқықтар қорғалған.</p>
+</footer>
+
+<div id="modal" class="modal" onclick="closeModalOnOutside(event)">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalTitle">Тақырып</h2>
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+    </div>
+</div>
+
+<div class="chat-button" id="chatButton">
+    <svg width="25" height="25" viewBox="0 0 24 24" fill="white"><path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2z"/></svg>
+</div>
+<div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+        <span>🤖 Bilim Bot</span>
+        <button class="close-chat" id="closeChat">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+        <div class="message bot">Сәлем! Мен Bilim Bot. Сұрақтарыңа жауап беремін 😊</div>
+    </div>
+    <div class="chat-input-container">
+        <input type="text" id="chatInput" placeholder="Сұрағыңызды жазыңыз...">
+        <button class="send-btn" id="sendBtn">➤</button>
+    </div>
+</div>
+
+<script>
+    // ========== ФЛЭШ-КАРТА СӨЗДЕРІ ==========
+    let flashcards = [
+        { kz: "Сәлеметсіз бе", ru: "Здравствуйте", known: false },
+        { kz: "Қайырлы таң", ru: "Доброе утро", known: false },
+        { kz: "Рақмет", ru: "Спасибо", known: false },
+        { kz: "Кешіріңіз", ru: "Извините", known: false },
+        { kz: "Сау болыңыз", ru: "До свидания", known: false },
+        { kz: "Кітап", ru: "Книга", known: false },
+        { kz: "Мектеп", ru: "Школа", known: false },
+        { kz: "Мұғалім", ru: "Учитель", known: false },
+        { kz: "Оқушы", ru: "Ученик", known: false },
+        { kz: "Дос", ru: "Друг", known: false },
+        { kz: "Ана", ru: "Мать", known: false },
+        { kz: "Әке", ru: "Отец", known: false },
+        { kz: "Бала", ru: "Ребенок", known: false },
+        { kz: "Үй", ru: "Дом", known: false },
+        { kz: "Су", ru: "Вода", known: false },
+        { kz: "Нан", ru: "Хлеб", known: false },
+        { kz: "Жұмыс", ru: "Работа", known: false },
+        { kz: "Оқу", ru: "Читать / Учеба", known: false },
+        { kz: "Жазу", ru: "Писать", known: false },
+        { kz: "Сөйлеу", ru: "Говорить", known: false }
+    ];
+
+    let currentCardIndex = 0;
+    let isFlipped = false;
+
+    // localStorage-дан сақталған прогресті жүктеу
+    function loadFlashcardProgress() {
+        const saved = localStorage.getItem('flashcardProgress');
+        if (saved) {
+            const savedProgress = JSON.parse(saved);
+            for (let i = 0; i < flashcards.length; i++) {
+                if (savedProgress[i] !== undefined) {
+                    flashcards[i].known = savedProgress[i];
+                }
+            }
+        }
+        updateFlashcardProgressDisplay();
+    }
+
+    function saveFlashcardProgress() {
+        const progress = flashcards.map(c => c.known);
+        localStorage.setItem('flashcardProgress', JSON.stringify(progress));
+    }
+
+    function updateFlashcardProgressDisplay() {
+        const knownCount = flashcards.filter(c => c.known).length;
+        const percent = (knownCount / flashcards.length) * 100;
+        const fillElement = document.getElementById('flashcardProgressFill');
+        const counterElement = document.getElementById('flashcardCounter');
+        if (fillElement) fillElement.style.width = percent + '%';
+        if (counterElement) counterElement.textContent = `${knownCount}/${flashcards.length} білдім`;
+    }
+
+    function showFlashcard() {
+        const currentCard = flashcards[currentCardIndex];
+        const flashcardElement = document.getElementById('flashcard');
+        const wordKzElement = document.getElementById('flashcardWordKz');
+        const wordRuElement = document.getElementById('flashcardWordRu');
+        
+        if (wordKzElement && wordRuElement && flashcardElement) {
+            wordKzElement.textContent = currentCard.kz;
+            wordRuElement.textContent = currentCard.ru;
+            flashcardElement.classList.remove('flipped');
+            isFlipped = false;
+        }
+        updateFlashcardProgressDisplay();
+    }
+
+    function flipCard() {
+        const flashcardElement = document.getElementById('flashcard');
+        if (flashcardElement) {
+            flashcardElement.classList.toggle('flipped');
+            isFlipped = !isFlipped;
+        }
+    }
+
+    function markAsKnown() {
+        flashcards[currentCardIndex].known = true;
+        saveFlashcardProgress();
+        nextCard();
+    }
+
+    function markAsRepeat() {
+        nextCard();
+    }
+
+    function nextCard() {
+        // Келесі білмеген сөзді табу
+        let nextIndex = (currentCardIndex + 1) % flashcards.length;
+        let found = false;
+        
+        for (let i = 0; i < flashcards.length; i++) {
+            const idx = (currentCardIndex + i + 1) % flashcards.length;
+            if (!flashcards[idx].known) {
+                nextIndex = idx;
+                found = true;
+                break;
+            }
+        }
+        
+        if (!found) {
+            // Барлық сөздер білінді
+            const congratsDiv = document.getElementById('congratsMessage');
+            if (congratsDiv) congratsDiv.style.display = 'block';
+            setTimeout(() => {
+                if (congratsDiv) congratsDiv.style.display = 'none';
+            }, 3000);
+        }
+        
+        currentCardIndex = nextIndex;
+        showFlashcard();
+    }
+
+    function resetFlashcards() {
+        if (confirm('Барлық флэш-карталарды қайта бастау керек пе? Прогресс жойылады.')) {
+            for (let i = 0; i < flashcards.length; i++) {
+                flashcards[i].known = false;
+            }
+            currentCardIndex = 0;
+            saveFlashcardProgress();
+            showFlashcard();
+        }
+    }
+
+    function getFlashcardContent() {
+        return `
+            <div class="flashcard-container">
+                <div class="flashcard" id="flashcard" onclick="flipCard()">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-word-kz" id="flashcardWordKz">Сәлеметсіз бе</div>
+                        <div class="flashcard-word-ru" id="flashcardWordRu">Здравствуйте</div>
+                    </div>
+                </div>
+                <div class="flashcard-stats">
+                    <div class="flashcard-progress">
+                        <div class="flashcard-progress-fill" id="flashcardProgressFill"></div>
+                    </div>
+                    <div class="flashcard-counter" id="flashcardCounter">0/${flashcards.length} білдім</div>
+                </div>
+                <div class="flashcard-buttons">
+                    <button class="card-btn btn-flip" onclick="flipCard()">🔄 Аудару</button>
+                    <button class="card-btn btn-know" onclick="markAsKnown()">✅ Білемін</button>
+                    <button class="card-btn btn-repeat" onclick="markAsRepeat()">🔄 Қайталау</button>
+                    <button class="card-btn reset-btn" onclick="resetFlashcards()">🔄 Барлығын қайта бастау</button>
+                </div>
+                <div id="congratsMessage" class="congrats-message" style="display: none;">
+                    🎉 Құттықтаймыз! Сіз барлық сөздерді білдіңіз! 🎉
+                </div>
+            </div>
+        `;
+    }
+
+    // ========== ГРАММАТИКА ==========
+    function getGrammarContent() {
+        return `
+            <div class="grammar-item"><h4>🏛️ Үндестік заңы</h4><p>Қазақ тілінде дауысты дыбыстар жіңішке (ә, е, і, ө, ү) және жуан (а, ы, о, ұ) болып екіге бөлінеді. Жуан дауысты сөзге жуан жалғау, жіңішке дауысты сөзге жіңішке жалғау қосылады.<br><br><strong>Мысалдар:</strong><br>• кітап → кітаптар (жуан)<br>• үй → үйлер (жіңішке)<br>• бала → балалар<br>• түлкі → түлкілер</p></div>
+            <div class="grammar-item"><h4>🔤 Септіктер</h4><p>Қазақ тілінде 7 септік бар:<br><br>
+            <strong>1. Атау септік</strong> - кім? не? (Астана, кітап)<br>
+            <strong>2. Ілік септік</strong> - кімнің? ненің? (Астананың, кітаптың)<br>
+            <strong>3. Барыс септік</strong> - кімге? неге? (Астанаға, кітапқа)<br>
+            <strong>4. Табыс септік</strong> - кімді? нені? (Астананы, кітапты)<br>
+            <strong>5. Жатыс септік</strong> - кімде? неде? (Астанада, кітапта)<br>
+            <strong>6. Шығыс септік</strong> - кімнен? неден? (Астанадан, кітаптан)<br>
+            <strong>7. Көмектес септік</strong> - кіммен? немен? (Астанамен, кітаппен)</p></div>
+            <div class="grammar-item"><h4>⏰ Етістік шақтары</h4><p><strong>Осы шақ:</strong> Жазып тұрмын, оқып тұрмын<br>
+            <strong>Келер шақ:</strong> Жазамын, оқимын<br>
+            <strong>Өткен шақ:</strong> Жаздым, оқыдым</p></div>
+            <div class="rule-box"><p>💡 <strong>Кеңес:</strong> Грамматиканы үйренуде ережелерді жаттап қана қоймай, оларды сөйлеуде қолдануға тырысыңыз.</p></div>
+        `;
+    }
+
+    const dictionaryWords = [
+        { kz: "Сәлеметсіз бе", ru: "Здравствуйте" }, { kz: "Қайырлы таң", ru: "Доброе утро" },
+        { kz: "Қайырлы күн", ru: "Добрый день" }, { kz: "Рақмет", ru: "Спасибо" },
+        { kz: "Кешіріңіз", ru: "Извините" }, { kz: "Сау болыңыз", ru: "До свидания" },
+        { kz: "Иә", ru: "Да" }, { kz: "Жоқ", ru: "Нет" }, { kz: "Үй", ru: "Дом" },
+        { kz: "Кітап", ru: "Книга" }, { kz: "Мектеп", ru: "Школа" }, { kz: "Мұғалім", ru: "Учитель" },
+        { kz: "Оқушы", ru: "Ученик" }, { kz: "Дос", ru: "Друг" }, { kz: "Ана", ru: "Мать" },
+        { kz: "Әке", ru: "Отец" }, { kz: "Бала", ru: "Ребенок" }, { kz: "Су", ru: "Вода" },
+        { kz: "Нан", ru: "Хлеб" }, { kz: "Жұмыс", ru: "Работа" }, { kz: "Оқу", ru: "Читать / Учеба" }
+    ];
+
+    const phrasesList = [
+        { phrase: "Алғыс айту", meaning: "Ризашылық білдіру" },
+        { phrase: "Амандық сұрау", meaning: "Сәлемдесу, хал-жағдайды білу" },
+        { phrase: "Қол ұшын беру", meaning: "Көмек көрсету" },
+        { phrase: "Сөз байлау", meaning: "Сөйлеуді бастау" }
+    ];
+
+    const familyWords = [
+        { kz: "Әке", ru: "Отец" }, { kz: "Ана", ru: "Мать" }, { kz: "Ұл", ru: "Сын" },
+        { kz: "Қыз", ru: "Дочь" }, { kz: "Аға", ru: "Старший брат" }, { kz: "Іні", ru: "Младший брат" },
+        { kz: "Ата", ru: "Дедушка" }, { kz: "Әже", ru: "Бабушка" }
+    ];
+
+    const proverbsList = [
+        { text: "Еңбек етсең емерсің", meaning: "Еңбек еткен адам табысқа жетеді" },
+        { text: "Білімді мыңды жығар", meaning: "Білімді адам көп қиындықты жеңеді" },
+        { text: "Отан оттан да ыстық", meaning: "Отанға деген сүйіспеншілік ең күшті" }
+    ];
+
+    function openModal(topic) {
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        
+        if (topic === 'grammar') {
+            modalTitle.innerHTML = '📖 Қазақ тілі грамматикасы';
+            modalBody.innerHTML = getGrammarContent();
+        } else if (topic === 'dictionary') {
+            modalTitle.innerHTML = '📚 Сөздік қор';
+            modalBody.innerHTML = `<div class="word-list">${dictionaryWords.map(w => `<div class="word-item"><strong>${w.kz}</strong> - ${w.ru}</div>`).join('')}</div>`;
+        } else if (topic === 'phrases') {
+            modalTitle.innerHTML = '💬 Тұрақты тіркестер';
+            modalBody.innerHTML = `<div class="word-list">${phrasesList.map(p => `<div class="word-item"><strong>${p.phrase}</strong><br><span style="font-size:0.7rem;">➜ ${p.meaning}</span></div>`).join('')}</div>`;
+        } else if (topic === 'family') {
+            modalTitle.innerHTML = '👨‍👩‍👧‍👦 Отбасы';
+            modalBody.innerHTML = `<div class="word-list">${familyWords.map(w => `<div class="word-item"><strong>${w.kz}</strong> - ${w.ru}</div>`).join('')}</div>`;
+        } else if (topic === 'proverbs') {
+            modalTitle.innerHTML = '📜 Мақал-мәтелдер';
+            modalBody.innerHTML = proverbsList.map(p => `<div class="proverb-card"><div class="proverb-text">"${p.text}"</div><div class="proverb-meaning">📖 ${p.meaning}</div></div>`).join('');
+        } else if (topic === 'flashcards') {
+            modalTitle.innerHTML = '🃏 Флэш-карталар - Сөздік қор';
+            modalBody.innerHTML = getFlashcardContent();
+            loadFlashcardProgress();
+            showFlashcard();
+        }
+        
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        document.getElementById('modal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    function closeModalOnOutside(e) {
+        if (e.target === document.getElementById('modal')) closeModal();
+    }
+
+    // Чат бот
+    const chatButton = document.getElementById('chatButton');
+    const chatWindow = document.getElementById('chatWindow');
+    const closeChat = document.getElementById('closeChat');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const chatMessages = document.getElementById('chatMessages');
+    
+    function addMessage(text, isUser) {
+        const div = document.createElement('div');
+        div.className = `message ${isUser ? 'user' : 'bot'}`;
+        div.textContent = text;
+        chatMessages.appendChild(div);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    function getBotResponse(msg) {
+        const m = msg.toLowerCase();
+        if (m.includes('сәлем')) return "Сәлем! Қалайсың? 😊";
+        if (m.includes('флэш') || m.includes('карта')) return "Флэш-карталар бөлімінде 20+ сөзді жаттауға болады! 🃏";
+        if (m.includes('грамматика')) return "Грамматика бөлімінде үндестік заңы, септіктер, етістік шақтары қарастырылған. 📖";
+        return "Кешіріңіз, мен бұл сұрақты түсінбедім. 'Көмек' деп жазыңыз.";
+    }
+    
+    function sendMessage() {
+        const msg = chatInput.value.trim();
+        if (!msg) return;
+        addMessage(msg, true);
+        chatInput.value = '';
+        setTimeout(() => addMessage(getBotResponse(msg), false), 300);
+    }
+    
+    chatButton.onclick = () => chatWindow.classList.toggle('open');
+    if (closeChat) closeChat.onclick = () => chatWindow.classList.remove('open');
+    sendBtn.onclick = sendMessage;
+    chatInput.onkeypress = (e) => { if (e.key === 'Enter') sendMessage(); };
+
+    window.openModal = openModal;
+    window.closeModal = closeModal;
+    window.closeModalOnOutside = closeModalOnOutside;
+    window.flipCard = flipCard;
+    window.markAsKnown = markAsKnown;
+    window.markAsRepeat = markAsRepeat;
+    window.resetFlashcards = resetFlashcards;
+    window.showFlashcard = showFlashcard;
+</script>
+</body>
+</html>

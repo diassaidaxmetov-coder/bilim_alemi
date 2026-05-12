@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ҰБТ тест | Bilim Alemi</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ========== ЖАЛПЫ СТИЛЬ (АШЫҚ КӨК) ========== */
+        body {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            font-family: 'Inter', sans-serif;
+            color: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ========== ХЕДЕР ========== */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid #e0f2fe;
+        }
+
+        .logo a {
+            color: #0284c7;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            color: #475569;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: white;
+        }
+
+        nav ul li a.active {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: white;
+        }
+
+        /* ========== НЕГІЗГІ КОНТЕНТ ========== */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .page-header {
+            text-align: center;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 30px auto;
+            display: block;
+        }
+
+        /* ========== ТЕСТ КОНТЕЙНЕРІ ========== */
+        .test-container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 28px;
+            padding: 30px;
+            border: 1px solid rgba(2, 132, 199, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .test-header h1 {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .test-header p {
+            color: #64748b;
+        }
+
+        /* ========== ПӘН ТАҢДАУ ========== */
+        .subject-selector {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .subject-selector label {
+            color: #0284c7;
+            font-size: 1.1rem;
+            margin-right: 15px;
+            font-weight: 500;
+        }
+
+        .subject-selector select {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 50px;
+            padding: 10px 20px;
+            color: #1e293b;
+            font-size: 1rem;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .subject-selector select:focus {
+            outline: none;
+            border-color: #0284c7;
+        }
+
+        /* ========== ТЕСТ АҚПАРАТЫ ========== */
+        .test-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .question-counter {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            padding: 8px 20px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .score-info {
+            background: #f59e0b;
+            padding: 8px 20px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* ========== СҰРАҚ ========== */
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #0284c7;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        /* ========== ЖАУАП НҰСҚАЛАРЫ ========== */
+        .answers-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .answer-option {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 16px;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #1e293b;
+            font-family: inherit;
+        }
+
+        .answer-option:hover {
+            background: #e0f2fe;
+            transform: translateX(5px);
+        }
+
+        .answer-option.selected {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            border-color: transparent;
+            color: white;
+        }
+
+        /* ========== БАТЫРМАЛАР ========== */
+        .test-controls {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .nav-btn, .submit-btn {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .nav-btn:hover, .submit-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.4);
+        }
+
+        .nav-btn:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            display: none;
+        }
+
+        .submit-btn:hover {
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        /* ========== НӘТИЖЕ ========== */
+        .result-container {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f8fafc;
+            border-radius: 20px;
+            display: none;
+        }
+
+        .result-score {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+        }
+
+        .score-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .score-max {
+            font-size: 1.2rem;
+            color: #64748b;
+        }
+
+        .result-details {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .result-item {
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .result-item.correct {
+            background: rgba(16, 185, 129, 0.15);
+            border-left: 4px solid #10b981;
+        }
+
+        .result-item.wrong {
+            background: rgba(239, 68, 68, 0.15);
+            border-left: 4px solid #ef4444;
+        }
+
+        .result-icon {
+            font-size: 1.5rem;
+        }
+
+        .result-text {
+            flex: 1;
+            color: #1e293b;
+            font-size: 0.9rem;
+        }
+
+        .result-correct-answer {
+            font-size: 0.8rem;
+            color: #10b981;
+            margin-top: 5px;
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .restart-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.4);
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: #64748b;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: auto;
+            border-top: 1px solid #e0f2fe;
+        }
+
+        @media (max-width: 600px) {
+            .test-container { padding: 20px; }
+            .question-text { font-size: 1rem; }
+            .test-controls { flex-wrap: wrap; }
+            .nav-btn, .submit-btn { flex: 1; }
+            .answer-option { padding: 10px 15px; font-size: 0.85rem; }
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            nav ul {
+                justify-content: center;
+            }
+            .page-header {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo"><a href="index.html">🎓 Bilim Alemi</a></div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Басты бет</a></li>
+            <li><a href="kazak_tili.html">Қазақ тілі</a></li>
+            <li><a href="tarih.html">Ұлттық тарих</a></li>
+            <li><a href="game.html">Ойындар</a></li>
+            <li><a href="about.html">📖 Біз туралы</a></li>
+            <li><a href="test.html" class="active">📝 ҰБТ тест</a></li>
+            <li><a href="profile.html">👤 Жеке кабинет</a></li>
+            <li><a href="contact.html">Байланыс</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1 class="page-header">📝 ҰБТ тест</h1>
+    <p style="text-align: center; color: #64748b; margin-bottom: 30px;">Пәнді таңдап, біліміңізді тексеріңіз</p>
+
+    <div class="test-container">
+        <div class="subject-selector">
+            <label>📚 Пәнді таңдаңыз:</label>
+            <select id="subjectSelect">
+                <option value="kazakh">🇰🇿 Қазақ тілі (30 сұрақ)</option>
+                <option value="history">🏛️ Қазақстан тарихы (30 сұрақ)</option>
+                <option value="math">🧮 Математика (30 сұрақ)</option>
+            </select>
+        </div>
+
+        <div id="testArea">
+            <div class="test-info">
+                <div class="question-counter">📊 Сұрақ: <span id="currentQ">1</span> / <span id="totalQ">30</span></div>
+                <div class="score-info">🏆 Дұрыс: <span id="currentScore">0</span></div>
+            </div>
+            <div class="question-text" id="questionText">Сұрақ жүктелуде...</div>
+            <div class="answers-list" id="answersList"></div>
+            <div class="test-controls">
+                <button class="nav-btn" id="prevBtn" disabled>◀ Артқа</button>
+                <button class="nav-btn" id="nextBtn">Келесі ▶</button>
+                <button class="submit-btn" id="submitBtn">📊 Тестті аяқтау</button>
+            </div>
+        </div>
+        <div id="resultContainer" class="result-container"></div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 Bilim Alemi. Барлық құқықтар қорғалған.</p>
+</footer>
+
+<script>
+    // ============= ҚАЗАҚ ТІЛІ (30 сұрақ) =============
+    const kazakhQuestions = [
+        { text: "Тұйық етістікті табыңыз", answers: ["Жазып", "Жазу", "Жазған", "Жазды", "Жазар"], correct: "Жазу" },
+        { text: "Синонимдер қатарын табыңыз", answers: ["Биік – аласа", "Әдемі – сұлу", "Қара – ақ", "Кіші – үлкен", "Тез – баяу"], correct: "Әдемі – сұлу" },
+        { text: "Құрмалас сөйлемді табыңыз", answers: ["Мен кітап оқыдым", "Күн суық", "Мен келдім де, ол кетті", "Ол жақсы", "Біз бардық"], correct: "Мен келдім де, ол кетті" },
+        { text: "Зат есімді табыңыз", answers: ["Келді", "Үлкен", "Үй", "Жақсы", "Оқы"], correct: "Үй" },
+        { text: "Тәуелдік жалғауын табыңыз", answers: ["Үйге", "Үйдің", "Үйім", "Үймен", "Үйден"], correct: "Үйім" },
+        { text: "Антоним сөздерді табыңыз", answers: ["Ақ – қара", "Үлкен – зор", "Әдемі – көркем", "Жылдам – тез", "Биік – асқар"], correct: "Ақ – қара" },
+        { text: "Есімдікті табыңыз", answers: ["Ол", "Жақсы", "Барды", "Үлкен", "Кел"], correct: "Ол" },
+        { text: "Сан есімді табыңыз", answers: ["Үш", "Келді", "Үлкен", "Жақсы", "Оқыды"], correct: "Үш" },
+        { text: "Сын есімді табыңыз", answers: ["Жүгірді", "Қызыл", "Барды", "Кел", "Жаз"], correct: "Қызыл" },
+        { text: "Етістікті табыңыз", answers: ["Кітап", "Әдемі", "Жүгіру", "Үй", "Қала"], correct: "Жүгіру" },
+        { text: "Дара сөзді табыңыз", answers: ["Аққу", "Теміржол", "Көк аспан", "Ата-ана", "Бала-шаға"], correct: "Аққу" },
+        { text: "Күрделі сөзді табыңыз", answers: ["Кітап", "Адам", "Теміржол", "Су", "Қала"], correct: "Теміржол" },
+        { text: "Туынды сөзді табыңıз", answers: ["Бас", "Басшы", "Су", "Көз", "Тас"], correct: "Басшы" },
+        { text: "Түбір сөзді табыңыз", answers: ["Жазушы", "Кітап", "Балықшы", "Оқулық", "Жазғыш"], correct: "Кітап" },
+        { text: "Шылауды табыңыз", answers: ["Және", "Үлкен", "Барды", "Әдемі", "Үй"], correct: "Және" },
+        { text: "Одағайды табыңыз", answers: ["Пах!", "Жақсы", "Үй", "Барды", "Кел"], correct: "Пах!" },
+        { text: "Еліктеу сөзді табыңыз", answers: ["Тарс", "Үлкен", "Кітап", "Жақсы", "Барды"], correct: "Тарс" },
+        { text: "Бастауышты табыңыз: 'Ол мектепке барды'", answers: ["Ол", "Мектепке", "Барды", "Ол мектепке", "Барды мектепке"], correct: "Ол" },
+        { text: "Баяндауышты табыңыз", answers: ["Ол", "Барды", "Мектепке", "Ол барды", "Ол мектепке"], correct: "Барды" },
+        { text: "Толықтауышты табыңыз", answers: ["Ол", "Мектепке", "Барды", "Ол барды", "Барды мектепке"], correct: "Мектепке" },
+        { text: "Жай сөйлемді табыңыз", answers: ["Мен келдім де, ол кетті", "Біз сабақ оқып отырмыз", "Егер келсең, айтам", "Ол барды да, қайтты", "Мен барсам, ол келмейді"], correct: "Біз сабақ оқып отырмыз" },
+        { text: "Салалас құрмаласты табыңыз", answers: ["Егер келсең, айтам", "Мен келдім де, ол кетті", "Келген соң айтты", "Айтсаң, барамын", "Келгенде көрдім"], correct: "Мен келдім де, ол кетті" },
+        { text: "Сабақтас құрмаласты табыңыз", answers: ["Мен келдім де, ол кетті", "Ол барды", "Егер келсең, айтам", "Біз отырмыз", "Ол жақсы"], correct: "Егер келсең, айтам" },
+        { text: "Қаратпа сөзді табыңыз", answers: ["Айналайын, келші", "Ол келді", "Біз бардық", "Мен оқыдым", "Олар келді"], correct: "Айналайын, келші" },
+        { text: "Қыстырма сөзді табыңыз", answers: ["Әрине, ол келеді", "Ол келді", "Біз бардық", "Мен оқыдым", "Олар келді"], correct: "Әрине, ол келеді" },
+        { text: "Төл сөзді табыңыз", answers: ["Ол айтты", '"Мен келемін" деді', "Ол келді", "Біз бардық", "Олар айтты"], correct: '"Мен келемін" деді' },
+        { text: "Буын түрін табыңыз: 'ата'", answers: ["Ашық буын", "Тұйық буын", "Бітеу буын", "Аралас", "Дұрыс емес"], correct: "Ашық буын" },
+        { text: "Дыбыс түрін табыңыз: 'а'", answers: ["Дауысты", "Дауыссыз", "Қатаң", "Ұяң", "Үнді"], correct: "Дауысты" },
+        { text: "Қатаң дыбысты табыңыз", answers: ["Б", "Д", "П", "Г", "З"], correct: "П" },
+        { text: "Ұяң дыбысты табыңыз", answers: ["Қ", "Т", "Б", "С", "Ф"], correct: "Б" }
+    ];
+
+    // ============= ҚАЗАҚСТАН ТАРИХЫ (30 сұрақ) =============
+    const historyQuestions = [
+        { text: "Қазақстан аумағындағы ең алғашқы адам іздері қай дәуірге жатады?", answers: ["Неолит", "Палеолит", "Энеолит", "Қола дәуірі", "Темір дәуірі"], correct: "Палеолит" },
+        { text: "Ботай мәдениеті қай өңірде табылған?", answers: ["Оңтүстік Қазақстан", "Батыс Қазақстан", "Солтүстік Қазақстан", "Шығыс Қазақстан", "Жетісу"], correct: "Солтүстік Қазақстан" },
+        { text: "Сақ тайпаларының астанасы?", answers: ["Отырар", "Сығанақ", "Есік", "Шірік-Рабат", "Тараз"], correct: "Шірік-Рабат" },
+        { text: "Алтын адам табылған қорған?", answers: ["Берел", "Бесшатыр", "Есік", "Шілікті", "Тасмола"], correct: "Есік" },
+        { text: "Ғұндардың билеушісі?", answers: ["Бумын", "Аттила", "Күлтегін", "Білге қаған", "Тоныкөк"], correct: "Аттила" },
+        { text: "Түрік қағанаты құрылған жыл?", answers: ["552 ж", "603 ж", "704 ж", "756 ж", "840 ж"], correct: "552 ж" },
+        { text: "Қарлұқ мемлекетінің орталығы?", answers: ["Тараз", "Баласағұн", "Суяб", "Испиджаб", "Отырар"], correct: "Суяб" },
+        { text: "Қарахан мемлекетінің негізін қалаушы?", answers: ["Бумын", "Сатұқ Боғра хан", "Едіге", "Абылай хан", "Қасым хан"], correct: "Сатұқ Боғра хан" },
+        { text: "Алтын Орда билеушісі?", answers: ["Керей", "Жәнібек", "Батый", "Қасым", "Есім"], correct: "Батый" },
+        { text: "Қазақ хандығы құрылған жыл?", answers: ["1456 ж", "1465-1466 жж", "1470 ж", "1480 ж", "1500 ж"], correct: "1465-1466 жж" },
+        { text: "Қазақ хандығын құрған хандар?", answers: ["Абылай, Әбілқайыр", "Керей, Жәнібек", "Қасым, Есім", "Тәуке, Абылай", "Бөкей, Жәңгір"], correct: "Керей, Жәнібек" },
+        { text: "Қасым ханның заңдар жинағы?", answers: ["Жеті жарғы", "Қасым ханның қасқа жолы", "Есім ханның ескі жолы", "Ата заң", "Хан жарлығы"], correct: "Қасым ханның қасқа жолы" },
+        { text: "Тәуке хан тұсындағы заң?", answers: ["Қасқа жол", "Жеті жарғы", "Ескі жол", "Хан жолы", "Билер кеңесі"], correct: "Жеті жарғы" },
+        { text: "Абылай хан билік құрған ғасыр?", answers: ["XV", "XVI", "XVII", "XVIII", "XIX"], correct: "XVIII" },
+        { text: "Жоңғар шапқыншылығы кезеңі?", answers: ["XV ғ", "XVI ғ", "XVII–XVIII ғ", "XIX ғ", "XX ғ"], correct: "XVII–XVIII ғ" },
+        { text: "Ақтабан шұбырынды жылы?", answers: ["1700", "1723", "1750", "1800", "1850"], correct: "1723" },
+        { text: "Кенесары Қасымұлы көтерілісі?", answers: ["1800–1810", "1820–1830", "1837–1847", "1850–1860", "1870–1880"], correct: "1837–1847" },
+        { text: "Қазақстан Ресейге қосылған ғасыр?", answers: ["XV", "XVI", "XVII", "XVIII", "XIX"], correct: "XVIII" },
+        { text: "1916 жылғы көтеріліс себебі?", answers: ["Салық", "Жер", "Тыл жұмысына алу", "Дін", "Сауда"], correct: "Тыл жұмысына алу" },
+        { text: "Алаш партиясы құрылған жыл?", answers: ["1916", "1917", "1918", "1920", "1925"], correct: "1917" },
+        { text: "Қазақ АКСР құрылған жыл?", answers: ["1917", "1918", "1920", "1925", "1936"], correct: "1920" },
+        { text: "Ұлы Отан соғысы жылдары?", answers: ["1939–1945", "1941–1945", "1940–1944", "1938–1943", "1942–1946"], correct: "1941–1945" },
+        { text: "Тың игеру басталған жыл?", answers: ["1945", "1950", "1954", "1960", "1965"], correct: "1954" },
+        { text: "Қазақстан тәуелсіздігін алған жыл?", answers: ["1986", "1990", "1991", "1992", "1995"], correct: "1991" },
+        { text: "Алғашқы Конституция қабылданды?", answers: ["1991", "1993", "1995", "1997", "2000"], correct: "1993" },
+        { text: "Астана (қазіргі Астана) көшірілген жыл?", answers: ["1995", "1997", "1998", "2000", "2005"], correct: "1997" },
+        { text: "Ұлттық валюта енгізілді?", answers: ["1991", "1992", "1993", "1994", "1995"], correct: "1993" },
+        { text: "Невада-Семей қозғалысы?", answers: ["Экология", "Экономика", "Саясат", "Білім", "Мәдениет"], correct: "Экология" },
+        { text: "Желтоқсан оқиғасы болған жыл?", answers: ["1985", "1986", "1987", "1988", "1989"], correct: "1986" },
+        { text: "Қазақстан БҰҰ-ға кірді?", answers: ["1991", "1992", "1993", "1994", "1995"], correct: "1992" }
+    ];
+
+    // ============= МАТЕМАТИКА (30 сұрақ) =============
+    const mathQuestions = [
+        { text: "2 + 3 × 4 = ?", answers: ["20", "14", "12", "10", "24"], correct: "14" },
+        { text: "x + 5 = 12", answers: ["5", "6", "7", "8", "9"], correct: "7" },
+        { text: "2x = 10", answers: ["2", "3", "4", "5", "6"], correct: "5" },
+        { text: "x² = 16", answers: ["4", "-4", "±4", "8", "2"], correct: "±4" },
+        { text: "200-дің 15%", answers: ["20", "25", "30", "35", "40"], correct: "30" },
+        { text: "√25 = ?", answers: ["4", "5", "6", "7", "8"], correct: "5" },
+        { text: "3² = ?", answers: ["6", "9", "3", "12", "8"], correct: "9" },
+        { text: "(a + b)² = ?", answers: ["a²+b²", "a²+2ab+b²", "a²−b²", "ab", "2a"], correct: "a²+2ab+b²" },
+        { text: "10⁻¹ = ?", answers: ["10", "1", "0.1", "-10", "100"], correct: "0.1" },
+        { text: "1/2 + 1/3 = ?", answers: ["2/5", "5/6", "1/5", "3/5", "4/6"], correct: "5/6" },
+        { text: "Тіктөртбұрыш периметрі?", answers: ["a+b", "2(a+b)", "ab", "a²", "4a"], correct: "2(a+b)" },
+        { text: "Шеңбер ұзындығы?", answers: ["πr²", "2πr", "r²", "πd²", "r"], correct: "2πr" },
+        { text: "Тіктөртбұрыш ауданы?", answers: ["ab", "a+b", "2a", "a²", "πr²"], correct: "ab" },
+        { text: "7 × 8 = ?", answers: ["54", "56", "48", "64", "52"], correct: "56" },
+        { text: "100 ÷ 4 = ?", answers: ["20", "25", "30", "15", "40"], correct: "25" },
+        { text: "sin90° = ?", answers: ["0", "1", "-1", "0.5", "2"], correct: "1" },
+        { text: "cos0° = ?", answers: ["0", "1", "-1", "0.5", "2"], correct: "1" },
+        { text: "5² = ?", answers: ["10", "20", "25", "15", "30"], correct: "25" },
+        { text: "√9 = ?", answers: ["2", "3", "4", "5", "6"], correct: "3" },
+        { text: "x − 3 = 7", answers: ["8", "9", "10", "11", "12"], correct: "10" },
+        { text: "2x + 4 = 10", answers: ["2", "3", "4", "5", "6"], correct: "3" },
+        { text: "3x = 12", answers: ["2", "3", "4", "5", "6"], correct: "4" },
+        { text: "0.5 + 0.5 = ?", answers: ["0", "1", "2", "0.5", "1.5"], correct: "1" },
+        { text: "12² = ?", answers: ["124", "144", "132", "142", "154"], correct: "144" },
+        { text: "80-дің 50%", answers: ["30", "35", "40", "45", "50"], correct: "40" },
+        { text: "√49 = ?", answers: ["6", "7", "8", "9", "5"], correct: "7" },
+        { text: "8 × 7 = ?", answers: ["54", "56", "64", "48", "52"], correct: "56" },
+        { text: "1000 ÷ 10 = ?", answers: ["10", "50", "100", "150", "200"], correct: "100" },
+        { text: "6³ = ?", answers: ["36", "216", "18", "108", "126"], correct: "216" },
+        { text: "1/4 = ?", answers: ["0.2", "0.25", "0.5", "0.75", "1"], correct: "0.25" }
+    ];
+
+    let currentQuestions = [];
+    let currentIndex = 0;
+    let userAnswers = [];
+    let totalQuestions = 30;
+    let currentSubject = "kazakh";
+
+    const subjectSelect = document.getElementById("subjectSelect");
+    const questionText = document.getElementById("questionText");
+    const answersList = document.getElementById("answersList");
+    const currentQSpan = document.getElementById("currentQ");
+    const totalQSpan = document.getElementById("totalQ");
+    const currentScoreSpan = document.getElementById("currentScore");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const submitBtn = document.getElementById("submitBtn");
+    const testArea = document.getElementById("testArea");
+    const resultContainer = document.getElementById("resultContainer");
+
+    function changeSubject() {
+        currentSubject = subjectSelect.value;
+        if (currentSubject === "kazakh") currentQuestions = [...kazakhQuestions];
+        else if (currentSubject === "history") currentQuestions = [...historyQuestions];
+        else currentQuestions = [...mathQuestions];
+        
+        totalQuestions = currentQuestions.length;
+        currentIndex = 0;
+        userAnswers = new Array(totalQuestions).fill(null);
+        updateCurrentScore();
+        loadQuestion();
+        prevBtn.disabled = true;
+        nextBtn.disabled = false;
+        submitBtn.style.display = "none";
+        resultContainer.style.display = "none";
+        testArea.style.display = "block";
+    }
+
+    function loadQuestion() {
+        const q = currentQuestions[currentIndex];
+        questionText.textContent = `${currentIndex + 1}. ${q.text}`;
+        currentQSpan.textContent = currentIndex + 1;
+        totalQSpan.textContent = totalQuestions;
+        
+        answersList.innerHTML = "";
+        q.answers.forEach((answer, idx) => {
+            const div = document.createElement("div");
+            div.className = "answer-option";
+            if (userAnswers[currentIndex] === answer) div.classList.add("selected");
+            div.innerHTML = `<span style="font-weight: bold; margin-right: 10px;">${String.fromCharCode(65+idx)}.</span> ${answer}`;
+            div.onclick = () => selectAnswer(answer);
+            answersList.appendChild(div);
+        });
+        
+        prevBtn.disabled = (currentIndex === 0);
+        
+        if (currentIndex === totalQuestions - 1) {
+            nextBtn.style.display = "none";
+            submitBtn.style.display = "block";
+        } else {
+            nextBtn.style.display = "block";
+            submitBtn.style.display = "none";
+        }
+    }
+
+    function selectAnswer(answer) {
+        userAnswers[currentIndex] = answer;
+        updateCurrentScore();
+        loadQuestion();
+    }
+
+    function updateCurrentScore() {
+        let score = 0;
+        for (let i = 0; i < totalQuestions; i++) {
+            if (userAnswers[i] && userAnswers[i] === currentQuestions[i].correct) score++;
+        }
+        currentScoreSpan.textContent = score;
+    }
+
+    function nextQuestion() {
+        if (currentIndex < totalQuestions - 1) {
+            currentIndex++;
+            loadQuestion();
+        }
+    }
+
+    function prevQuestion() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            loadQuestion();
+        }
+    }
+
+    function submitTest() {
+        let correctCount = 0;
+        const results = [];
+        
+        for (let i = 0; i < totalQuestions; i++) {
+            const isCorrect = (userAnswers[i] === currentQuestions[i].correct);
+            if (isCorrect) correctCount++;
+            results.push({
+                question: currentQuestions[i].text,
+                userAnswer: userAnswers[i],
+                correctAnswer: currentQuestions[i].correct,
+                isCorrect: isCorrect
+            });
+        }
+        
+        const percent = Math.round((correctCount / totalQuestions) * 100);
+        let grade = "";
+        if (percent >= 90) grade = "Өте жақсы (A)";
+        else if (percent >= 75) grade = "Жақсы (B)";
+        else if (percent >= 60) grade = "Қанағаттанарлық (C)";
+        else if (percent >= 45) grade = "Қанағаттанарлықсыз (D)";
+        else grade = "Қанағаттанарлықсыз (F)";
+        
+        let resultHtml = `
+            <div class="result-score">
+                <div class="score-circle"><span class="score-number">${correctCount}</span></div>
+                <div class="score-max">${totalQuestions} ұпайдың ішінен</div>
+                <div style="font-size: 1.5rem; font-weight: bold; margin-top: 10px; color: #0284c7;">${percent}% - ${grade}</div>
+            </div>
+            <div class="result-details">
+                <h3 style="color: #0284c7; margin-bottom: 15px;">📋 Жауаптарды тексеру:</h3>
+        `;
+        
+        results.forEach((result, idx) => {
+            resultHtml += `
+                <div class="result-item ${result.isCorrect ? 'correct' : 'wrong'}">
+                    <div class="result-icon">${result.isCorrect ? '✅' : '❌'}</div>
+                    <div class="result-text">
+                        <strong>${idx + 1}. ${result.question}</strong><br>
+                        Сіздің жауабыңыз: ${result.userAnswer || "Жауап берілмеген"}<br>
+                        ${!result.isCorrect ? `<span class="result-correct-answer">Дұрыс жауап: ${result.correctAnswer}</span>` : ''}
+                    </div>
+                </div>
+            `;
+        });
+        
+        resultHtml += `</div><button class="restart-btn" onclick="restartTest()">🔄 Қайта тест тапсыру</button>`;
+        
+        testArea.style.display = "none";
+        resultContainer.style.display = "block";
+        resultContainer.innerHTML = resultHtml;
+    }
+
+    function restartTest() {
+        userAnswers = new Array(totalQuestions).fill(null);
+        currentIndex = 0;
+        updateCurrentScore();
+        resultContainer.style.display = "none";
+        testArea.style.display = "block";
+        loadQuestion();
+    }
+
+    subjectSelect.onchange = changeSubject;
+    nextBtn.onclick = nextQuestion;
+    prevBtn.onclick = prevQuestion;
+    submitBtn.onclick = submitTest;
+    
+    changeSubject();
+</script>
+</body>
+</html>

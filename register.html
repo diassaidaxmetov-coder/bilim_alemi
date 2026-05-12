@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <title>Тіркелу</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      width: 350px;
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #2575fc;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #6a11cb;
+    }
+  </style>
+  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="card">
+    <h2>Тіркелу</h2>
+    <input type="text" id="name" placeholder="Атыңыз">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Құпиясөз">
+    <input type="password" id="confirm" placeholder="Құпиясөзді растау">
+    <button onclick="register()">Тіркелу</button>
+    <p>Бұрын аккаунт бар ма? <a href="login.html">Кіру</a></p>
+  </div>
+
+  <script>
+    function register() {
+      let name = document.getElementById("name").value;
+      let email = document.getElementById("email").value;
+      let pass = document.getElementById("password").value;
+      let confirm = document.getElementById("confirm").value;
+
+      if(pass !== confirm) {
+        alert("Құпиясөз сәйкес келмейді!");
+        return;
+      }
+
+      localStorage.setItem("user", JSON.stringify({name, email, pass, score:0}));
+      alert("Тіркелу сәтті өтті!");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

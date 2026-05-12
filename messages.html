@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Хабарламалар | Bilim Alemi</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            font-family: 'Inter', sans-serif;
+            color: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid #e0f2fe;
+        }
+
+        .logo a {
+            color: #0284c7;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            color: #475569;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: white;
+        }
+
+        nav ul li a.active {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: white;
+        }
+
+        main {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .page-header {
+            text-align: center;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 30px auto;
+            display: block;
+        }
+
+        .messages-container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 28px;
+            padding: 30px;
+            border: 1px solid rgba(2, 132, 199, 0.2);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .total-messages {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            padding: 8px 20px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .delete-all-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .delete-all-btn:hover {
+            background: #dc2626;
+            transform: scale(1.02);
+        }
+
+        .messages-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .message-item {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .message-item:hover {
+            transform: translateX(5px);
+            border-color: #0284c7;
+            box-shadow: 0 5px 15px rgba(2, 132, 199, 0.1);
+        }
+
+        .message-item.unread {
+            border-left: 4px solid #0284c7;
+            background: #f0f9ff;
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .sender-info {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .sender-name {
+            font-weight: bold;
+            color: #0284c7;
+        }
+
+        .sender-email {
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        .message-date {
+            color: #94a3b8;
+            font-size: 0.8rem;
+        }
+
+        .message-text {
+            color: #1e293b;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .message-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .delete-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+
+        .delete-btn:hover {
+            background: #dc2626;
+        }
+
+        .read-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+
+        .read-btn:hover {
+            background: #059669;
+        }
+
+        .empty-messages {
+            text-align: center;
+            padding: 50px;
+            color: #64748b;
+        }
+
+        .empty-messages .icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: #64748b;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: auto;
+            border-top: 1px solid #e0f2fe;
+        }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 15px; text-align: center; }
+            nav ul { justify-content: center; }
+            .page-header { font-size: 1.8rem; }
+            .message-header { flex-direction: column; align-items: flex-start; }
+            .stats { flex-direction: column; align-items: stretch; }
+            .delete-all-btn { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo"><a href="index.html">🎓 Bilim Alemi</a></div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Басты бет</a></li>
+            <li><a href="kazak_tili.html">Қазақ тілі</a></li>
+            <li><a href="tarix.html">Ұлттық тарих</a></li>
+            <li><a href="game.html">Ойындар</a></li>
+            <li><a href="about.html">📖 Біз туралы</a></li>
+            <li><a href="profile.html">👤 Жеке кабинет</a></li>
+            <li><a href="contact.html">Байланыс</a></li>
+            <li><a href="test.html">📝 ҰБТ тест</a></li>
+            <li><a href="messages.html" class="active">📬 Хабарламалар</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1 class="page-header">📬 Хабарламалар</h1>
+    
+    <div class="messages-container">
+        <div class="stats">
+            <div class="total-messages">📊 Барлығы: <span id="totalCount">0</span> хабарлама</div>
+            <button class="delete-all-btn" onclick="deleteAllMessages()">🗑️ Барлығын өшіру</button>
+        </div>
+        <div class="messages-list" id="messagesList">
+            <div class="empty-messages">
+                <div class="icon">📭</div>
+                <p>Хабарлама жоқ</p>
+                <p style="font-size: 0.85rem;">Әзірге ешкім хабарлама жібермеген</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 Bilim Alemi. Барлық құқықтар қорғалған.</p>
+</footer>
+
+<script>
+    // Хабарламаларды жүктеу және көрсету
+    function loadMessages() {
+        const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+        const messagesList = document.getElementById('messagesList');
+        const totalCount = document.getElementById('totalCount');
+        
+        totalCount.textContent = messages.length;
+        
+        if (messages.length === 0) {
+            messagesList.innerHTML = `
+                <div class="empty-messages">
+                    <div class="icon">📭</div>
+                    <p>Хабарлама жоқ</p>
+                    <p style="font-size: 0.85rem;">Әзірге ешкім хабарлама жібермеген</p>
+                </div>
+            `;
+            return;
+        }
+        
+        // Хабарламаларды кері ретпен көрсету (жаңасы бірінші)
+        const sortedMessages = [...messages].reverse();
+        
+        messagesList.innerHTML = sortedMessages.map(msg => `
+            <div class="message-item ${!msg.read ? 'unread' : ''}" data-id="${msg.id}">
+                <div class="message-header">
+                    <div class="sender-info">
+                        <span class="sender-name">👤 ${escapeHtml(msg.name)}</span>
+                        <span class="sender-email">📧 ${escapeHtml(msg.email)}</span>
+                    </div>
+                    <div class="message-date">📅 ${msg.date}</div>
+                </div>
+                <div class="message-text">
+                    ${escapeHtml(msg.message)}
+                </div>
+                <div class="message-actions">
+                    ${!msg.read ? `<button class="read-btn" onclick="markAsRead(${msg.id})">✅ Оқылды деп белгілеу</button>` : ''}
+                    <button class="delete-btn" onclick="deleteMessage(${msg.id})">🗑️ Өшіру</button>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    // HTML кодын қауіпсіз ету
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    // Хабарламаны оқылды деп белгілеу
+    function markAsRead(id) {
+        let messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+        const index = messages.findIndex(msg => msg.id === id);
+        if (index !== -1) {
+            messages[index].read = true;
+            localStorage.setItem('contactMessages', JSON.stringify(messages));
+            loadMessages();
+        }
+    }
+    
+    // Жеке хабарламаны өшіру
+    function deleteMessage(id) {
+        if (confirm('Бұл хабарламаны өшіргіңіз келе ме?')) {
+            let messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+            messages = messages.filter(msg => msg.id !== id);
+            localStorage.setItem('contactMessages', JSON.stringify(messages));
+            loadMessages();
+        }
+    }
+    
+    // Барлық хабарламаларды өшіру
+    function deleteAllMessages() {
+        if (confirm('Барлық хабарламаларды өшіргіңіз келе ме? Бұл әрекетті қайтару мүмкін емес!')) {
+            localStorage.removeItem('contactMessages');
+            loadMessages();
+        }
+    }
+    
+    // Бет жүктелгенде
+    loadMessages();
+</script>
+
+</body>
+</html>

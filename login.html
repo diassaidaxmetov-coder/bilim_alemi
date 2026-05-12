@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кіру | Bilim Alemi</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      background: rgba(0, 0, 0, 0.9);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .logo a:hover {
+      transform: scale(1.05);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    /* Main */
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 35px;
+      border-radius: 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      width: 400px;
+      text-align: center;
+      animation: slideInUp 0.5s ease;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card h2 {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 12px;
+      border: 2px solid #e0e0e0;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .register-link {
+      margin-top: 20px;
+      color: #666;
+    }
+
+    .register-link a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .register-link a:hover {
+      text-decoration: underline;
+    }
+
+    .error-message {
+      background: #ffebee;
+      color: #f44336;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 15px;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: auto;
+    }
+
+    @media (max-width: 500px) {
+      .card {
+        width: 90%;
+        padding: 25px;
+      }
+      header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+      nav ul {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><a href="index.html">🎓 Bilim Alemi</a></div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Басты бет</a></li>
+      <li><a href="kazak_tili.html">Қазақ тілі</a></li>
+      <li><a href="tarih.html">Ұлттық тарих</a></li>
+      <li><a href="game.html">Ойындар</a></li>
+      <li><a href="about.html">📖 Біз туралы</a></li>
+      <li><a href="profile.html">👤 Жеке кабинет</a></li>
+      <li><a href="contact.html">Байланыс</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <div class="card">
+    <h2>🔐 Кіру</h2>
+    <form onsubmit="login(event)">
+      <div class="input-group">
+        <label>📧 Email пошта</label>
+        <input type="email" id="email" placeholder="example@email.com" required>
+      </div>
+      <div class="input-group">
+        <label>🔒 Құпиясөз</label>
+        <input type="password" id="password" placeholder="Құпиясөзіңіз" required>
+      </div>
+      <button type="submit">Кіру</button>
+    </form>
+    <div id="errorMessage" class="error-message">❌ Email немесе құпиясөз қате!</div>
+    <div class="register-link">
+      <p>Аккаунт жоқ па? <a href="register.html">Тіркелу →</a></p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2025 Bilim Alemi. Барлық құқықтар қорғалған.</p>
+</footer>
+
+<script>
+  function login(event) {
+    event.preventDefault();
+    
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const errorDiv = document.getElementById("errorMessage");
+    
+    // Барлық пайдаланушыларды тексеру
+    let foundUser = null;
+    
+    // localStorage-тағы барлық пайдаланушыларды іздеу
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith('user_')) {
+        const userData = localStorage.getItem(key);
+        if (userData) {
+          const user = JSON.parse(userData);
+          if (user.email === email && user.password === password) {
+            foundUser = user;
+            break;
+          }
+        }
+      }
+    }
+    
+    if (foundUser) {
+      localStorage.setItem("currentUser", foundUser.name);
+      alert("✅ Кіру сәтті өтті! " + foundUser.name + " ретінде кірдіңіз.");
+      window.location.href = "profile.html";
+    } else {
+      errorDiv.style.display = "block";
+      setTimeout(() => {
+        errorDiv.style.display = "none";
+      }, 3000);
+    }
+  }
+</script>
+
+</body>
+</html>

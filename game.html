@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=1.0">
+    <title>Ойындар | Bilim Alemi</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ========== ЖАЛПЫ СТИЛЬ (АШЫҚ КӨК) ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            font-family: 'Inter', sans-serif;
+            color: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ========== ХЕДЕР ========== */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid #e0f2fe;
+        }
+
+        @media (min-width: 768px) {
+            header {
+                padding: 1rem 2rem;
+            }
+        }
+
+        .logo a {
+            color: #0284c7;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        @media (min-width: 768px) {
+            .logo a {
+                font-size: 1.5rem;
+            }
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav ul li a {
+            color: #475569;
+            text-decoration: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 0.75rem;
+            background: rgba(255,255,255,0.6);
+        }
+
+        @media (min-width: 768px) {
+            nav ul li a {
+                padding: 0.5rem 1rem;
+                font-size: 1rem;
+                border-radius: 8px;
+                background: transparent;
+            }
+        }
+
+        nav ul li a:hover {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: white;
+        }
+
+        nav ul li a.active {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: white;
+        }
+
+        /* ========== НЕГІЗГІ КОНТЕНТ ========== */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 15px;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            main {
+                padding: 20px;
+            }
+        }
+
+        .page-header {
+            text-align: center;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 20px auto;
+            display: block;
+        }
+
+        @media (min-width: 768px) {
+            .page-header {
+                font-size: 2.5rem;
+                margin: 30px auto;
+            }
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+        }
+
+        @media (min-width: 768px) {
+            .subtitle {
+                margin-bottom: 20px;
+                font-size: 1rem;
+            }
+        }
+
+        /* ========== ОЙЫН КАРТОЧКАЛАРЫ ========== */
+        .games-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .games-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 30px;
+                padding: 20px;
+                margin-top: 20px;
+            }
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid rgba(2, 132, 199, 0.2);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .game-card {
+                padding: 30px;
+                border-radius: 28px;
+            }
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(2, 132, 199, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .game-card:hover::before {
+            left: 100%;
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px);
+            border-color: #0284c7;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (min-width: 768px) {
+            .game-card:hover {
+                transform: translateY(-12px) scale(1.02);
+            }
+        }
+
+        .game-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+
+        @media (min-width: 768px) {
+            .game-icon {
+                font-size: 4rem;
+                margin-bottom: 20px;
+            }
+        }
+
+        .game-card:hover .game-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .game-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .game-title {
+                font-size: 1.6rem;
+                margin-bottom: 10px;
+            }
+        }
+
+        .game-description {
+            color: #475569;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        @media (min-width: 768px) {
+            .game-description {
+                font-size: 0.9rem;
+                line-height: 1.5;
+                margin-bottom: 20px;
+            }
+        }
+
+        .game-difficulty {
+            display: inline-block;
+            background: #e0f2fe;
+            border-radius: 50px;
+            padding: 4px 12px;
+            font-size: 0.7rem;
+            color: #0284c7;
+        }
+
+        @media (min-width: 768px) {
+            .game-difficulty {
+                padding: 5px 15px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* ========== МОДАЛЬДЫ ТЕРЕЗЕ ========== */
+        .game-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .game-modal-content {
+            background: white;
+            border-radius: 24px;
+            max-width: 800px;
+            width: 95%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 20px;
+            position: relative;
+            border: 1px solid rgba(2, 132, 199, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .game-modal-content {
+                width: 90%;
+                padding: 30px;
+                border-radius: 28px;
+            }
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e0f2fe;
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .modal-header {
+                padding-bottom: 15px;
+                margin-bottom: 20px;
+            }
+        }
+
+        .modal-header h2 {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 1.2rem;
+        }
+
+        @media (min-width: 768px) {
+            .modal-header h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .close-modal {
+            background: #e2e8f0;
+            border: none;
+            color: #475569;
+            font-size: 22px;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        @media (min-width: 768px) {
+            .close-modal {
+                font-size: 28px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        .close-modal:hover {
+            background: #ef4444;
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        /* ========== ОЙЫН СТАТИСТИКАСЫ ========== */
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        @media (min-width: 768px) {
+            .game-stats {
+                gap: 15px;
+                margin-bottom: 25px;
+                padding-bottom: 15px;
+            }
+        }
+
+        .score-box, .level-box, .timer-box {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            padding: 6px 12px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        @media (min-width: 768px) {
+            .score-box, .level-box, .timer-box {
+                padding: 8px 20px;
+                font-size: 1rem;
+            }
+        }
+
+        .timer-box { background: #f59e0b; }
+        .timer-box.warning { background: #ef4444; animation: pulse 0.5s infinite; }
+        @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+        #game-question {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #0284c7;
+            margin-bottom: 20px;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        @media (min-width: 768px) {
+            #game-question {
+                font-size: 1.3rem;
+                margin-bottom: 25px;
+            }
+        }
+
+        /* ========== ЖАУАП НҰСҚАЛАРЫ ========== */
+        .game-answers {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .game-answers {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+                margin-bottom: 25px;
+            }
+        }
+
+        .game-answers button {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            padding: 10px;
+            border-radius: 50px;
+            color: #1e293b;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        @media (min-width: 768px) {
+            .game-answers button {
+                padding: 14px;
+                font-size: 1rem;
+            }
+        }
+
+        .game-answers button:hover {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .correct-answer { background: #10b981 !important; color: white !important; }
+        .wrong-answer { background: #ef4444 !important; color: white !important; }
+
+        /* ========== БАТЫРМАЛАР ========== */
+        .game-controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .game-controls {
+                gap: 15px;
+                margin-top: 20px;
+            }
+        }
+
+        .game-start-btn, .game-next-btn {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+        }
+
+        @media (min-width: 768px) {
+            .game-start-btn, .game-next-btn {
+                padding: 10px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        .game-start-btn:hover, .game-next-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .game-next-btn { background: #0ea5e9; display: none; }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: #64748b;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+            border-top: 1px solid #e0f2fe;
+            font-size: 0.7rem;
+        }
+
+        @media (min-width: 768px) {
+            footer {
+                padding: 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo"><a href="index.html">🎓 Bilim Alemi</a></div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Басты бет</a></li>
+            <li><a href="kazak_tili.html">Қазақ тілі</a></li>
+            <li><a href="tarih.html">Ұлттық тарих</a></li>
+            <li><a href="game.html" class="active">Ойындар</a></li>
+            <li><a href="about.html">📖 Біз туралы</a></li>
+            <li><a href="profile.html">👤 Жеке кабинет</a></li>
+            <li><a href="contact.html">Байланыс</a></li>
+            <li><a href="test.html">📝 ҰБТ тест</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1 class="page-header">🎮 Ойындар әлемі</h1>
+    <p class="subtitle">Өз біліміңді сынап, қызықты ойындар ойна!</p>
+
+    <div class="games-grid">
+        <div class="game-card" onclick="openGameModal('word')">
+            <div class="game-icon">📖</div>
+            <h2 class="game-title">Сөз табу</h2>
+            <p class="game-description">Қазақ тілінен сөздерді тауып, сөздік қорыңды байыт!</p>
+            <span class="game-difficulty">⭐ Орташа</span>
+        </div>
+
+        <div class="game-card" onclick="openGameModal('math')">
+            <div class="game-icon">🧮</div>
+            <h2 class="game-title">Есептер</h2>
+            <p class="game-description">Математикалық есептер шығарып, ақыл-ойды жетілдір!</p>
+            <span class="game-difficulty">⭐⭐ Қиын</span>
+        </div>
+
+        <div class="game-card" onclick="openGameModal('logic')">
+            <div class="game-icon">🧠</div>
+            <h2 class="game-title">Логика</h2>
+            <p class="game-description">Логикалық сұрақтарға жауап беріп, ойлау қабілетіңді дамыт!</p>
+            <span class="game-difficulty">⭐⭐⭐ Өте қиын</span>
+        </div>
+
+        <div class="game-card" onclick="openGameModal('history')">
+            <div class="game-icon">🏛️</div>
+            <h2 class="game-title">Қазақстан тарихы</h2>
+            <p class="game-description">Қазақстан тарихынан сұрақтарға жауап бер!</p>
+            <span class="game-difficulty">⭐⭐ Орташа</span>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 Bilim Alemi. Барлық құқықтар қорғалған.</p>
+</footer>
+
+<!-- Модальды терезе -->
+<div id="gameModal" class="game-modal" onclick="closeModalOnOutside(event)">
+    <div class="game-modal-content">
+        <div class="modal-header">
+            <h2 id="modalTitle">Ойын</h2>
+            <button class="close-modal" onclick="closeGameModal()">&times;</button>
+        </div>
+        <div id="gameContent"></div>
+    </div>
+</div>
+
+<script>
+    // ============= ОЙЫН СҰРАҚТАРЫ =============
+    
+    const wordQuestions = [
+        { question: "'Адамгершілік' сөзінің мағынасы?", answers: ["Ізгілік", "Күш", "Байлық", "Даңқ"], correct: "Ізгілік", points: 10 },
+        { question: "'Мейірімді' сөзіне синоним?", answers: ["Қайырымды", "Қатал", "Ашулы", "Сараң"], correct: "Қайырымды", points: 10 },
+        { question: "'Жақсы' сөзіне антоним?", answers: ["Жаман", "Үлкен", "Кіші", "Ақылды"], correct: "Жаман", points: 10 },
+        { question: "Қазақ тіліндегі дауысты дыбыстар саны?", answers: ["12", "10", "15", "8"], correct: "12", points: 10 },
+        { question: "Қазақ әліпбиінде неше әріп бар?", answers: ["42", "41", "43", "40"], correct: "42", points: 10 }
+    ];
+
+    const mathQuestions = [
+        { question: "15 × 8 = ?", answers: ["120", "125", "115", "130"], correct: "120", points: 15 },
+        { question: "144 ÷ 12 = ?", answers: ["12", "14", "10", "16"], correct: "12", points: 15 },
+        { question: "7² + 8² = ?", answers: ["113", "105", "98", "120"], correct: "113", points: 15 },
+        { question: "45 + 37 = ?", answers: ["82", "72", "92", "78"], correct: "82", points: 15 },
+        { question: "256 ÷ 16 = ?", answers: ["16", "14", "18", "12"], correct: "16", points: 15 }
+    ];
+
+    const logicQuestions = [
+        { question: "Екі адам шахмат ойнады. Әрқайсысы 3 партиядан ойнады. Барлығы неше партия ойналды?", answers: ["3", "6", "4", "5"], correct: "3", points: 20 },
+        { question: "Бөлмеде 5 шам жанып тұр. Біреуін сөндірді. Қанша шам қалды?", answers: ["5", "4", "1", "0"], correct: "5", points: 20 },
+        { question: "Қай сан ең үлкен? 5, 15, 25, 35", answers: ["35", "25", "15", "5"], correct: "35", points: 20 },
+        { question: "Үшбұрыштың неше қабырғасы бар?", answers: ["3", "4", "5", "6"], correct: "3", points: 20 },
+        { question: "Бір аптада неше күн бар?", answers: ["7", "5", "6", "8"], correct: "7", points: 20 }
+    ];
+
+    const historyQuestions = [
+        { question: "Қазақ хандығы қай жылы құрылды?", answers: ["1465", "1456", "1475", "1480"], correct: "1465", points: 10 },
+        { question: "Абай Құнанбаев қай жылы дүниеге келді?", answers: ["1845", "1850", "1840", "1855"], correct: "1845", points: 10 },
+        { question: "Жеті Жарғы заңдарын кім қабылдады?", answers: ["Тәуке хан", "Абылай хан", "Қасым хан", "Есім хан"], correct: "Тәуке хан", points: 10 },
+        { question: "Қазақстан тәуелсіздігін қай жылы алды?", answers: ["1991", "1990", "1992", "1993"], correct: "1991", points: 10 },
+        { question: "Алтын адам қай жерден табылды?", answers: ["Есік қорғаны", "Берел қорғаны", "Шілікті қорғаны", "Талды қорғаны"], correct: "Есік қорғаны", points: 10 }
+    ];
+
+    let currentGameQuestions = [];
+    let currentIndex = 0;
+    let score = 0;
+    let gameActive = false;
+    let timer = 20;
+    let timerInterval = null;
+    let canAnswer = true;
+    let currentGameType = null;
+
+    function openGameModal(gameType) {
+        currentGameType = gameType;
+        const modal = document.getElementById('gameModal');
+        const modalTitle = document.getElementById('modalTitle');
+        
+        if (gameType === 'word') {
+            modalTitle.innerHTML = '📖 Сөз табу ойыны';
+            currentGameQuestions = [...wordQuestions];
+        } else if (gameType === 'math') {
+            modalTitle.innerHTML = '🧮 Есептер ойыны';
+            currentGameQuestions = [...mathQuestions];
+        } else if (gameType === 'logic') {
+            modalTitle.innerHTML = '🧠 Логикалық сұрақтар';
+            currentGameQuestions = [...logicQuestions];
+        } else if (gameType === 'history') {
+            modalTitle.innerHTML = '🏛️ Қазақстан тарихы';
+            currentGameQuestions = [...historyQuestions];
+        }
+        
+        for (let i = currentGameQuestions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [currentGameQuestions[i], currentGameQuestions[j]] = [currentGameQuestions[j], currentGameQuestions[i]];
+        }
+        currentGameQuestions = currentGameQuestions.slice(0, 10);
+        
+        const gameContent = document.getElementById('gameContent');
+        gameContent.innerHTML = `
+            <div class="game-stats">
+                <div class="score-box">🏆 Ұпай: <span id="gameScoreValue">0</span></div>
+                <div class="level-box">📊 Сұрақ: <span id="gameQuestionNum">0</span>/<span id="gameTotalQuestions">${currentGameQuestions.length}</span></div>
+                <div class="timer-box" id="gameTimerBox">⏱️ Уақыт: <span id="gameTimer">${currentGameType === 'math' ? 30 : 20}</span>с</div>
+            </div>
+            <p id="game-question">🎯 Ойынды бастау үшін батырманы басыңыз!</p>
+            <div class="game-answers" id="gameAnswers"></div>
+            <p id="gameResult" style="text-align: center;"></p>
+            <div class="game-controls">
+                <button class="game-start-btn" id="gameStartBtn">🎮 Ойынды бастау</button>
+                <button class="game-next-btn" id="gameNextBtn">➡️ Келесі сұрақ</button>
+            </div>
+        `;
+        
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        initGame();
+    }
+    
+    function initGame() {
+        currentIndex = 0;
+        score = 0;
+        gameActive = false;
+        canAnswer = true;
+        
+        document.getElementById('gameScoreValue').textContent = '0';
+        document.getElementById('gameResult').innerHTML = '';
+        document.getElementById('gameNextBtn').style.display = 'none';
+        document.getElementById('gameStartBtn').disabled = false;
+        document.getElementById('gameStartBtn').textContent = '🎮 Ойынды бастау';
+        
+        document.getElementById('gameStartBtn').onclick = () => {
+            if (gameActive && confirm('Қайта бастау?')) {
+                startGame();
+            } else if (!gameActive) {
+                startGame();
+            }
+        };
+        
+        document.getElementById('gameNextBtn').onclick = () => {
+            if (gameActive) {
+                currentIndex++;
+                showQuestion();
+            }
+        };
+    }
+    
+    function stopTimer() {
+        if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+    }
+    
+    function startTimer() {
+        const maxTime = currentGameType === 'math' ? 30 : 20;
+        timer = maxTime;
+        document.getElementById('gameTimer').textContent = timer;
+        document.getElementById('gameTimerBox').classList.remove('warning');
+        
+        timerInterval = setInterval(() => {
+            if (!gameActive || !canAnswer) return;
+            timer--;
+            document.getElementById('gameTimer').textContent = timer;
+            if (timer <= 5) {
+                document.getElementById('gameTimerBox').classList.add('warning');
+            }
+            if (timer <= 0) {
+                stopTimer();
+                if (canAnswer) {
+                    canAnswer = false;
+                    const q = currentGameQuestions[currentIndex];
+                    document.getElementById('gameResult').innerHTML = `⏰ Уақыт бітті! Дұрыс жауап: ${q.correct}`;
+                    const btns = document.querySelectorAll('.game-answers button');
+                    btns.forEach(btn => {
+                        btn.disabled = true;
+                        if (btn.textContent === q.correct) {
+                            btn.classList.add('correct-answer');
+                        }
+                    });
+                    document.getElementById('gameNextBtn').style.display = 'block';
+                }
+            }
+        }, 1000);
+    }
+    
+    function showQuestion() {
+        if (!gameActive) return;
+        if (currentIndex >= currentGameQuestions.length) {
+            endGame();
+            return;
+        }
+        canAnswer = true;
+        const q = currentGameQuestions[currentIndex];
+        document.getElementById('game-question').textContent = q.question;
+        document.getElementById('gameQuestionNum').textContent = currentIndex + 1;
+        
+        const shuffled = [...q.answers];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        
+        const answersDiv = document.getElementById('gameAnswers');
+        answersDiv.innerHTML = '';
+        shuffled.forEach(answer => {
+            const btn = document.createElement('button');
+            btn.textContent = answer;
+            btn.onclick = () => checkAnswer(answer);
+            answersDiv.appendChild(btn);
+        });
+        
+        document.getElementById('gameResult').innerHTML = '';
+        document.getElementById('gameNextBtn').style.display = 'none';
+        stopTimer();
+        startTimer();
+    }
+    
+    function checkAnswer(selected) {
+        if (!gameActive || !canAnswer) return;
+        canAnswer = false;
+        stopTimer();
+        
+        const q = currentGameQuestions[currentIndex];
+        const isCorrect = (selected === q.correct);
+        const btns = document.querySelectorAll('.game-answers button');
+        
+        btns.forEach(btn => {
+            btn.disabled = true;
+            if (btn.textContent === q.correct) {
+                btn.classList.add('correct-answer');
+            } else if (btn.textContent === selected && !isCorrect) {
+                btn.classList.add('wrong-answer');
+            }
+        });
+        
+        if (isCorrect) {
+            score += q.points;
+            document.getElementById('gameScoreValue').textContent = score;
+            document.getElementById('gameResult').innerHTML = `✅ Дұрыс! +${q.points} ұпай!`;
+        } else {
+            document.getElementById('gameResult').innerHTML = `❌ Қате! Дұрыс жауап: ${q.correct}`;
+        }
+        
+        document.getElementById('gameNextBtn').style.display = 'block';
+    }
+    
+    function startGame() {
+        stopTimer();
+        currentIndex = 0;
+        score = 0;
+        gameActive = true;
+        canAnswer = true;
+        
+        document.getElementById('gameScoreValue').textContent = '0';
+        document.getElementById('gameResult').innerHTML = '';
+        document.getElementById('gameStartBtn').disabled = true;
+        document.getElementById('gameStartBtn').textContent = '🎮 Ойын жүріп жатыр...';
+        
+        showQuestion();
+    }
+    
+    function endGame() {
+        gameActive = false;
+        stopTimer();
+        
+        document.getElementById('game-question').textContent = '🏆 Ойын аяқталды! 🏆';
+        document.getElementById('gameAnswers').innerHTML = '';
+        document.getElementById('gameNextBtn').style.display = 'none';
+        document.getElementById('gameStartBtn').disabled = false;
+        document.getElementById('gameStartBtn').textContent = '🔄 Қайта ойнау';
+        
+        const totalPossible = currentGameQuestions.length * (currentGameType === 'logic' ? 20 : (currentGameType === 'math' ? 15 : 10));
+        document.getElementById('gameResult').innerHTML = `📊 Нәтиже: ${score} / ${totalPossible} ұпай`;
+        
+        if (score > 0) {
+            let savedScore = parseInt(localStorage.getItem('totalGameScore') || 0);
+            localStorage.setItem('totalGameScore', savedScore + score);
+        }
+    }
+    
+    function closeGameModal() {
+        stopTimer();
+        const modal = document.getElementById('gameModal');
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        gameActive = false;
+    }
+    
+    function closeModalOnOutside(event) {
+        const modal = document.getElementById('gameModal');
+        if (event.target === modal) {
+            closeGameModal();
+        }
+    }
+</script>
+
+</body>
+</html>

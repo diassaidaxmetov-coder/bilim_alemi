@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Байланыс | Bilim Alemi</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            font-family: 'Inter', sans-serif;
+            color: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid #e0f2fe;
+        }
+
+        .logo a {
+            color: #0284c7;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            color: #475569;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: white;
+        }
+
+        nav ul li a.active {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: white;
+        }
+
+        main {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .page-header {
+            text-align: center;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 30px auto;
+            display: block;
+        }
+
+        .contact-wrapper { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 30px; 
+            margin-bottom: 30px; 
+        }
+
+        .contact-card { 
+            background: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(10px); 
+            border-radius: 28px; 
+            padding: 30px; 
+            transition: all 0.3s; 
+            border: 1px solid rgba(2, 132, 199, 0.2); 
+        }
+
+        .contact-card:hover { 
+            transform: translateY(-5px); 
+            border-color: #0284c7; 
+            background: white; 
+            box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.1); 
+        }
+
+        .contact-card h2 { 
+            background: linear-gradient(135deg, #0284c7, #38bdf8); 
+            -webkit-background-clip: text; 
+            background-clip: text; 
+            color: transparent; 
+            margin-bottom: 20px; 
+        }
+
+        .contact-info-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            margin: 15px 0; 
+            padding: 10px; 
+            background: #f0f9ff; 
+            border-radius: 15px; 
+            transition: all 0.3s; 
+        }
+
+        .contact-info-item:hover { 
+            background: #e0f2fe; 
+            transform: translateX(5px); 
+        }
+
+        .contact-info-item .icon { font-size: 1.8rem; }
+        .contact-info-item .text { color: #475569; }
+        .contact-info-item .text strong { color: #0284c7; }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #0284c7; font-weight: 500; }
+        .form-group input, .form-group textarea { 
+            width: 100%; padding: 12px; background: #f0f9ff; border: 1px solid #bae6fd; 
+            border-radius: 16px; color: #1e293b; font-family: inherit; transition: all 0.3s;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none; border-color: #0284c7; box-shadow: 0 0 0 2px rgba(2,132,199,0.2);
+        }
+        .submit-btn { 
+            background: linear-gradient(135deg, #0284c7, #38bdf8); color: white; border: none; 
+            padding: 14px; border-radius: 50px; width: 100%; cursor: pointer; font-weight: 600;
+            transition: all 0.3s;
+        }
+        .submit-btn:hover { transform: scale(1.02); box-shadow: 0 4px 15px rgba(2,132,199,0.4); }
+
+        .map-wrapper { border-radius: 28px; overflow: hidden; max-width: 800px; margin: 0 auto; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
+        .map-wrapper iframe { width: 100%; height: 350px; border: none; }
+
+        .social-links { display: flex; justify-content: center; gap: 25px; margin-top: 20px; flex-wrap: wrap; }
+        .social-btn { display: inline-flex; align-items: center; gap: 12px; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s; }
+        .social-btn.instagram { background: linear-gradient(135deg, #833AB4, #E4405F, #F56040); color: white; }
+        .social-btn.whatsapp { background: #25D366; color: white; }
+        .social-btn:hover { transform: translateY(-3px) scale(1.05); }
+
+        .success-message { background: #10b981; color: white; padding: 12px; border-radius: 12px; text-align: center; margin-top: 15px; display: none; }
+
+        .admin-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: #0284c7;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .admin-link:hover { text-decoration: underline; }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: #64748b;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: auto;
+            border-top: 1px solid #e0f2fe;
+        }
+
+        @media (max-width: 768px) { 
+            .social-links { flex-direction: column; align-items: center; } 
+            .social-btn { width: 80%; justify-content: center; }
+            header { flex-direction: column; gap: 15px; text-align: center; }
+            nav ul { justify-content: center; }
+            .page-header { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo"><a href="index.html">🎓 Bilim Alemi</a></div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Басты бет</a></li>
+            <li><a href="kazak_tili.html">Қазақ тілі</a></li>
+            <li><a href="tarix.html">Ұлттық тарих</a></li>
+            <li><a href="game.html">Ойындар</a></li>
+            <li><a href="about.html">📖 Біз туралы</a></li>
+            <li><a href="profile.html">👤 Жеке кабинет</a></li>
+            <li><a href="contact.html" class="active">Байланыс</a></li>
+            <li><a href="test.html">📝 ҰБТ тест</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1 class="page-header">📞 Бізбен байланысыңыз</h1>
+    
+    <div class="contact-wrapper">
+        <div class="contact-card">
+            <h2>📍 Біздің мекен-жай</h2>
+            <div class="contact-info-item"><div class="icon">📍</div><div class="text"><strong>Мекен-жай:</strong><br>Қазақстан, Семей қаласы, Абай көшесі, 10-үй</div></div>
+            <div class="contact-info-item"><div class="icon">📞</div><div class="text"><strong>Телефон:</strong><br>+7 (777) 123-45-67</div></div>
+            <div class="contact-info-item"><div class="icon">✉️</div><div class="text"><strong>Email:</strong><br>info@bilim.kz</div></div>
+            <div class="contact-info-item"><div class="icon">🕒</div><div class="text"><strong>Жұмыс уақыты:</strong><br>Дүйсенбі - Жұма: 09:00 - 18:00</div></div>
+        </div>
+
+        <div class="contact-card">
+            <h2>✉️ Хабарлама жіберу</h2>
+            <form id="contactForm">
+                <div class="form-group"><label>👤 Аты-жөніңіз</label><input type="text" id="userName" placeholder="Мысалы: Асан Асанов" required></div>
+                <div class="form-group"><label>📧 Email пошта</label><input type="email" id="userEmail" placeholder="asan@example.com" required></div>
+                <div class="form-group"><label>💬 Хабарламаңыз</label><textarea id="userMessage" rows="4" placeholder="Сұрақтарыңыз бен ұсыныстарыңыз..." required></textarea></div>
+                <button type="submit" class="submit-btn">📨 Хабарлама жіберу</button>
+                <div id="successMessage" class="success-message">✅ Хабарламаңыз сәтті жіберілді!</div>
+            </form>
+        </div>
+    </div>
+
+    <div class="contact-card" style="text-align: center; margin-bottom: 30px;">
+        <h2 style="justify-content: center;">📱 Біз әлеуметтік желілерде</h2>
+        <div class="social-links">
+            <a href="#" class="social-btn instagram" id="instagramLink" target="_blank"><span class="social-icon">📷</span><span>Instagram</span></a>
+            <a href="#" class="social-btn whatsapp" id="whatsappLink" target="_blank"><span class="social-icon">💬</span><span>WhatsApp</span></a>
+        </div>
+        <p style="color: #64748b; margin-top: 15px;">Бізге қосылыңыз! Жаңалықтар мен қызықты ақпараттарды бірінші болып біліңіз.</p>
+    </div>
+
+    <div class="map-container">
+        <h2 style="text-align: center; background: linear-gradient(135deg, #0284c7, #38bdf8); -webkit-background-clip: text; background-clip: text; color: transparent;">🗺️ Біздің орналасқан жеріміз</h2>
+        <div class="map-wrapper">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d36616.44973253288!2d80.210355!3d50.411456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x42914a94721b6a23%3A0x5bb3f0f6cf5cc35b!2z0KHQsNC50L3QtdC90YHQutCw0Y8g0JrQvtC80L_QtdGC0YDQvtC1!5e0!3m2!1sru!2skz!4v1695737999999!5m2!1sru!2skz" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <p style="text-align: center; color: #64748b; margin-top: 12px;">📍 Семей қаласы, Абай көшесі 10</p>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 Bilim Alemi. Барлық құқықтар қорғалған.</p>
+</footer>
+
+<script>
+    // Хабарламаларды сақтау функциясы
+    function saveMessage(name, email, message) {
+        let messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+        const newMessage = {
+            id: Date.now(),
+            name: name,
+            email: email,
+            message: message,
+            date: new Date().toLocaleString(),
+            read: false
+        };
+        messages.push(newMessage);
+        localStorage.setItem('contactMessages', JSON.stringify(messages));
+    }
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) { 
+        e.preventDefault(); 
+        
+        const name = document.getElementById('userName').value;
+        const email = document.getElementById('userEmail').value;
+        const message = document.getElementById('userMessage').value;
+        
+        // Хабарламаны сақтау
+        saveMessage(name, email, message);
+        
+        document.getElementById('successMessage').style.display = 'block'; 
+        document.getElementById('userName').value = ''; 
+        document.getElementById('userEmail').value = ''; 
+        document.getElementById('userMessage').value = ''; 
+        
+        setTimeout(() => { 
+            document.getElementById('successMessage').style.display = 'none'; 
+        }, 3000); 
+    });
+    
+    document.getElementById('instagramLink').href = 'https://www.instagram.com/';
+    document.getElementById('whatsappLink').href = 'https://wa.me/77001275939';
+</script>
+
+</body>
+</html>

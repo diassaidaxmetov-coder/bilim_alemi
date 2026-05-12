@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=1.0">
+    <title>Ұлттық тарих | Bilim Alemi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: url('https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=1600') no-repeat center center fixed;
+            background-size: cover;
+            color: #1e293b;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        @media (min-width: 768px) {
+            header {
+                padding: 1rem 2rem;
+            }
+        }
+
+        .logo a {
+            color: #1e293b;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        @media (min-width: 768px) {
+            .logo a {
+                font-size: 1.5rem;
+            }
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav ul li a {
+            color: #4b5563;
+            text-decoration: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 0.75rem;
+            background: rgba(255,255,255,0.6);
+        }
+
+        @media (min-width: 768px) {
+            nav ul li a {
+                padding: 0.5rem 1rem;
+                font-size: 1rem;
+                border-radius: 8px;
+                background: transparent;
+            }
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+            border-radius: 28px;
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+
+        @media (min-width: 768px) {
+            .hero-section {
+                padding: 60px 40px;
+                border-radius: 40px;
+                margin: 30px auto;
+            }
+        }
+
+        .hero-section h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .hero-section h1 {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+        .hero-section p {
+            font-size: 0.9rem;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .hero-section p {
+                font-size: 1.2rem;
+            }
+        }
+
+        .history-layout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 20px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .history-left {
+            flex: 1.2;
+            min-width: 280px;
+        }
+
+        .history-right {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .cities-section {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 28px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .cities-section h2 {
+            text-align: center;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        @media (min-width: 768px) {
+            .cities-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .cities-section > p {
+            text-align: center;
+            color: #64748b;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+        }
+
+        .cities-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        @media (min-width: 768px) {
+            .cities-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+        }
+
+        .city-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            padding: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .city-card:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.2);
+        }
+
+        .city-name {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #3b82f6;
+            margin-bottom: 5px;
+        }
+
+        .city-region {
+            font-size: 0.7rem;
+            color: #64748b;
+        }
+
+        .gallery-title {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        @media (min-width: 768px) {
+            .gallery-title {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+        }
+
+        .persons-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .persons-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .persons-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .person-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.4s;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+        }
+
+        .person-card:hover {
+            transform: translateY(-8px);
+            border-color: #3b82f6;
+            background: white;
+            box-shadow: 0 20px 30px -12px rgba(59, 130, 246, 0.2);
+        }
+
+        .person-avatar {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 12px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .person-avatar {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 15px;
+            }
+        }
+
+        .person-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .person-avatar .avatar-emoji {
+            font-size: 3rem;
+        }
+
+        .person-name {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #3b82f6;
+            margin-bottom: 4px;
+        }
+
+        .person-years {
+            color: #8b5cf6;
+            font-size: 0.7rem;
+        }
+
+        .person-desc {
+            color: #64748b;
+            font-size: 0.7rem;
+            margin-top: 6px;
+            line-height: 1.4;
+        }
+
+        .fact-badge {
+            display: inline-block;
+            background: #eff6ff;
+            border-radius: 50px;
+            padding: 3px 10px;
+            font-size: 0.6rem;
+            color: #3b82f6;
+            margin-top: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .person-name {
+                font-size: 1.2rem;
+            }
+            .person-years {
+                font-size: 0.8rem;
+            }
+            .person-desc {
+                font-size: 0.8rem;
+                margin-top: 8px;
+            }
+            .fact-badge {
+                padding: 4px 12px;
+                font-size: 0.7rem;
+                margin-top: 10px;
+            }
+        }
+
+        .modal-person, .city-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-person-content, .city-modal-content {
+            background: white;
+            border-radius: 24px;
+            max-width: 500px;
+            width: 90%;
+            padding: 25px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (min-width: 768px) {
+            .modal-person-content, .city-modal-content {
+                border-radius: 28px;
+                padding: 30px;
+            }
+        }
+
+        .close-person-modal, .close-city-modal {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: #94a3b8;
+        }
+
+        .close-person-modal:hover, .close-city-modal:hover {
+            color: #ef4444;
+        }
+
+        .modal-avatar {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-avatar .avatar-emoji {
+            font-size: 3.5rem;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-top: 15px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: transform 0.2s;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s;
+        }
+
+        @media (min-width: 768px) {
+            .chat-button {
+                bottom: 30px;
+                right: 30px;
+                width: 65px;
+                height: 65px;
+            }
+        }
+
+        .chat-button:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-button svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            left: 20px;
+            width: auto;
+            height: 450px;
+            background: white;
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        @media (min-width: 768px) {
+            .chat-window {
+                bottom: 110px;
+                right: 30px;
+                left: auto;
+                width: 380px;
+                height: 550px;
+                border-radius: 28px;
+            }
+        }
+
+        .chat-window.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: #f8fafc;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 8px 12px;
+            border-radius: 18px;
+            font-size: 0.8rem;
+        }
+
+        .message.user {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            align-self: flex-end;
+        }
+
+        .message.bot {
+            background: #e2e8f0;
+            color: #1e293b;
+            align-self: flex-start;
+        }
+
+        .chat-input-container {
+            padding: 10px;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 8px;
+        }
+
+        .chat-input-container input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 50px;
+            outline: none;
+            font-size: 0.85rem;
+        }
+
+        .send-btn {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .close-chat {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            color: #64748b;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            font-size: 0.7rem;
+        }
+
+        @media (min-width: 768px) {
+            footer {
+                padding: 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 860px) {
+            .history-layout {
+                flex-direction: column;
+            }
+            .cities-section {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo"><a href="index.html">🎓 Bilim Alemi</a></div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Басты бет</a></li>
+            <li><a href="kazak_tili.html">Қазақ тілі</a></li>
+            <li><a href="tarih.html" class="active">Ұлттық тарих</a></li>
+            <li><a href="game.html">Ойындар</a></li>
+            <li><a href="about.html">📖 Біз туралы</a></li>
+            <li><a href="profile.html">👤 Жеке кабинет</a></li>
+            <li><a href="contact.html">Байланыс</a></li>
+            <li><a href="test.html">📝 ҰБТ тест</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="hero-section">
+        <h1>🏛️ Ұлттық тарих</h1>
+        <p>Қазақстанның бай тарихы мен мәдени мұрасымен танысыңыз</p>
+    </div>
+
+    <div class="history-layout">
+        <div class="history-left">
+            <div class="cities-section">
+                <h2>🏙️ Қазақстан қалалары</h2>
+                <p>Қаланы басыңыз - толық ақпарат аласыз</p>
+                <div class="cities-grid" id="citiesGrid"></div>
+            </div>
+        </div>
+
+        <div class="history-right">
+            <h2 class="gallery-title">🌟 Ұлы тұлғалар галереясы</h2>
+            <div class="persons-grid" id="personsGrid"></div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>© 2025 Bilim Alemi. Барлық құқықтар қорғалған.</p>
+</footer>
+
+<div id="personModal" class="modal-person" onclick="closePersonModalOnOutside(event)">
+    <div class="modal-person-content">
+        <button class="close-person-modal" onclick="closePersonModal()">&times;</button>
+        <div id="modalAvatar" class="modal-avatar"></div>
+        <h3 id="modalName" style="color:#3b82f6; text-align:center; font-size:1.3rem;">Абай Құнанбаев</h3>
+        <p id="modalYears" style="color:#8b5cf6; text-align:center;">1845-1904</p>
+        <div id="modalBio" style="color:#475569; margin-top:12px; line-height:1.6;"></div>
+        <button class="action-btn" id="actionBtn">📖 45 қара сөзді оқу →</button>
+    </div>
+</div>
+
+<div id="cityModal" class="city-modal" onclick="closeCityModalOnOutside(event)">
+    <div class="city-modal-content">
+        <button class="close-city-modal" onclick="closeCityModal()">&times;</button>
+        <h3 id="cityModalTitle" style="color:#3b82f6; font-size:1.3rem;">Астана</h3>
+        <div id="cityModalBody" style="color:#475569; margin-top:12px;"></div>
+    </div>
+</div>
+
+<div class="chat-button" id="chatButton">
+    <svg viewBox="0 0 24 24" fill="white"><path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2z"/></svg>
+</div>
+<div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+        <div style="display:flex; align-items:center; gap:8px;">
+            <div style="width:30px;height:30px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;">🤖</div>
+            <div><b>Bilim Bot</b><br><span style="font-size:9px;">● Онлайн</span></div>
+        </div>
+        <button class="close-chat" id="closeChat">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+        <div class="message bot">Сәлем! Мен Bilim Bot. Қалалар мен тұлғалар туралы сұрақтарыңа жауап беремін 😊</div>
+    </div>
+    <div class="chat-input-container">
+        <input type="text" id="chatInput" placeholder="Сұрағыңызды жазыңыз...">
+        <button class="send-btn" id="sendBtn">📨</button>
+    </div>
+</div>
+
+<script>
+    const citiesData = {
+        astana: { name: "🌆 Астана", info: "<strong>Құрылған жылы:</strong> 1830 жыл<br><strong>Қазба байлықтары:</strong> Құрылыс материалдары<br><strong>Тарихы:</strong> 1997 жылдан бастап Қазақстанның елордасы.<br><strong>Қызықты дерек:</strong> Бәйтерек монументі - Астананың символы." },
+        almaty: { name: "🏔️ Алматы", info: "<strong>Құрылған жылы:</strong> 1854 жыл<br><strong>Қазба байлықтары:</strong> Алтын, күміс<br><strong>Тарихы:</strong> 1929-1997 жылдары Қазақстанның астанасы.<br><strong>Қызықты дерек:</strong> Көк-Төбедегі телевежа - 371 метр." },
+        shymkent: { name: "🌞 Шымкент", info: "<strong>Құрылған жылы:</strong> XII ғасыр<br><strong>Қазба байлықтары:</strong> Қорғасын, мырыш<br><strong>Тарихы:</strong> Жібек жолының бойындағы көне қала.<br><strong>Қызықты дерек:</strong> Қаланың тарихы 2200 жылдан астам." },
+        karaganda: { name: "⛏️ Қарағанды", info: "<strong>Құрылған жылы:</strong> 1931 жыл<br><strong>Қазба байлықтары:</strong> Көмір<br><strong>Тарихы:</strong> Көмір бассейнінің орталығы.<br><strong>Қызықты дерек:</strong> Қарағанды - Қазақстанның көмір астанасы." },
+        aktobe: { name: "🏭 Ақтөбе", info: "<strong>Құрылған жылы:</strong> 1874 жыл<br><strong>Қазба байлықтары:</strong> Хромит, мұнай, газ<br><strong>Тарихы:</strong> Батыс Қазақстанның ірі өнеркәсіп орталығы.<br><strong>Қызықты дерек:</strong> Әлемдегі ең ірі хромит кен орындарының бірі." },
+        atyrau: { name: "🛢️ Атырау", info: "<strong>Құрылған жылы:</strong> 1640 жыл<br><strong>Қазба байлықтары:</strong> Мұнай, газ<br><strong>Тарихы:</strong> 'Қазақстанның мұнайлы астанасы'.<br><strong>Қызықты дерек:</strong> Еуропа мен Азия шекарасындағы жалғыз қала." },
+        semey: { name: "📖 Семей", info: "<strong>Құрылған жылы:</strong> 1718 жыл<br><strong>Қазба байлықтары:</strong> Құрылыс материалдары<br><strong>Тарихы:</strong> Абай, Мұхтар Әуезов, Шәкәрімнің отаны.<br><strong>Қызықты дерек:</strong> Семейдегі Әуезов атындағы театр - ең көне театрлардың бірі." }
+    };
+
+    // БАРЛЫҚ 21 ТҰЛҒАНЫҢ ДЕРЕКТЕРІ (ӘРҚАЙСЫСЫНЫҢ ӨЗ ШЫҒАРМАСЫМЕН)
+    const personsData = {
+        abay: { avatarImg: "https://i.ibb.co.com/XZRPtcgF/i.webp", name: "Абай Құнанбаев", years: "1845-1904", bio: "Қазақтың ұлы ақыны, ағартушы, философ. Шығармалары: 'Қара сөздер' (45 нақыл сөз), 'Желсіз түнде жарық ай', 'Көзімнің қарасы', 'Қараңғы түнде тау қалғып'.", actionText: "📖 45 қара сөзді оқу →", actionLink: "qarasoz.html" },
+        shokan: { avatarImg: "https://i.ibb.co.com/bMpnHzp8/i-1.webp", name: "Шоқан Уәлиханов", years: "1835-1865", bio: "Ғалым, саяхатшы, этнограф. Еңбектері: 'Қырғыздар туралы жазбалар', 'Қазақтар туралы этнографиялық очерк', 'Сырым Датұлы туралы'.", actionText: "📚 Еңбектерін оқу →", actionLink: "https://kk.wikipedia.org/wiki/Шоқан_Уәлиханов" },
+        ybyray: { avatarImg: "https://i.ibb.co.com/B2cbPW0r/i.webp", name: "Ыбырай Алтынсарин", years: "1841-1889", bio: "Педагог, ағартушы. Шығармалары: 'Қазақ хрестоматиясы', 'Өсиет', 'Өнер алды - қызыл тіл', 'Кел, балалар, оқылық!'.", actionText: "📖 Өлеңдерін оқу →", actionLink: "https://kk.wikipedia.org/wiki/Ыбырай_Алтынсарин" },
+        kerey: { avatarImg: "https://i.ibb.co.com/gZHNLfV3/i-2.webp", name: "Керей хан", years: "XV ғасыр", bio: "Қазақ хандығының негізін қалаушы. Жәнібек ханмен бірге Қазақ хандығын құрды.", actionText: "📜 Қазақ хандығының тарихы →", actionLink: "https://kk.wikipedia.org/wiki/Қазақ_хандығы" },
+        kenesary: { avatarImg: "https://i.ibb.co.com/GvrTDTsK/i-3.webp", name: "Кенесары Қасымов", years: "1802-1847", bio: "Қазақтың соңғы ханы. Ұлт-азаттық көтерілістің басшысы.", actionText: "🏹 Көтеріліс тарихы →", actionLink: "https://kk.wikipedia.org/wiki/Кенесары_Қасымов" },
+        toke: { avatarImg: "https://i.ibb.co.com/XZpqmksG/i-5.webp", name: "Тәуке хан", years: "1680-1718", bio: "'Жеті Жарғы' заңдарын қабылдаған хан.", actionText: "⚖️ Жеті Жарғы заңдары →", actionLink: "https://kk.wikipedia.org/wiki/Жеті_Жарғы" },
+        akhmet: { avatarImg: "https://i.ibb.co.com/tMZNbmG6/i-6.webp", name: "Ахмет Байтұрсынов", years: "1872-1937", bio: "Қазақ әліпбиінің реформаторы, ғалым. Өлеңдері: 'Маса', 'Қыр баласы', 'Қазақтың бас ақыны'.", actionText: "📖 Өлеңдерін оқу →", actionLink: "https://kk.wikipedia.org/wiki/Ахмет_Байтұрсынов" },
+        azilkhan: { avatarImg: "https://i.ibb.co.com/nsPc14Rf/i-7.webp", name: "Әзілхан Нұршайықов", years: "1922-2014", bio: "Қазақ жазушысы. Шығармалары: 'Махаббат, қызық мол жылдар', 'Ақиқат', 'Соңғы кездесу'.", actionText: "📚 Романын оқу →", actionLink: "https://kk.wikipedia.org/wiki/Әзілхан_Нұршайықов" },
+        alikhan: { avatarImg: "https://i.ibb.co.com/d4WxTBkZ/SUx182.webp", name: "Әлихан Бөкейхан", years: "1866-1937", bio: "Алаш партиясының жетекшісі, Алашорда төрағасы. Публицист.", actionText: "📰 Мақалаларын оқу →", actionLink: "https://kk.wikipedia.org/wiki/Әлихан_Бөкейхан" },
+        bauyrzhan: { avatarImg: "https://i.ibb.co.com/8gp6JHXt/SUx182-2x.webp", name: "Бауыржан Момышұлы", years: "1910-1982", bio: "Кеңес Одағының Батыры, жазушы. Кітаптары: 'Мәскеу үшін шайқас', 'Ұшқан ұя', 'Жауынгердің күнделігі'.", actionText: "📖 Кітаптарын оқу →", actionLink: "https://kk.wikipedia.org/wiki/Бауыржан_Момышұлы" },
+        beimbet: { avatarImg: "https://i.ibb.co.com/nsRMcJMH/i-8.webp", name: "Бейімбет Майлин", years: "1894-1938", bio: "Қазақ жазушысы, драматург. Шығармалары: 'Райхан', 'Азаматтар', 'Шұға', 'Майдан'.", actionText: "📖 Шығармаларын оқу →", actionLink: "https://kk.wikipedia.org/wiki/Бейімбет_Майлин" },
+        dinmukhamed: { avatarImg: "https://i.ibb.co.com/pvh5N9sN/i-9.webp", name: "Дінмұхамед Қонаев", years: "1912-1993", bio: "Кеңес дәуіріндегі Қазақстан басшысы. Еңбектері: 'Қазақстанның даму жолы', 'Мемуарлар'.", actionText: "📚 Еңбектерін оқу →", actionLink: "https://kk.wikipedia.org/wiki/Дінмұхамед_Қонаев" },
+        zhussup: { avatarImg: "https://i.ibb.co.com/8429q0Rt/SUx182-2x-1.webp", name: "Жүсіпбек Аймауытов", years: "1889-1931", bio: "Жазушы, драматург. Шығармалары: 'Ақбілек', 'Қарт қойшы', 'Құнанбай'.", actionText: "📖 'Ақбілек' романын оқу →", actionLink: "https://kk.wikipedia.org/wiki/Жүсіпбек_Аймауытов" },
+        kadyr: { avatarImg: "https://i.ibb.co.com/ZzZLznfN/20170708210603794-middle.jpg", name: "Қадыр Мырза Әлі", years: "1935-2011", bio: "Ұлы ақын. Өлеңдері: 'Іңкәр', 'Мен өлең айтамын', 'Қашқар қызы'.", actionText: "📖 Өлеңдерін оқу →", actionLink: "https://kk.wikipedia.org/wiki/Қадыр_Мырза_Әлі" },
+        kanysh: { avatarImg: "https://i.ibb.co.com/cKmLmzwb/i-10.webp", name: "Қаныш Сәтбаев", years: "1899-1964", bio: "Ұлы геолог, Қазақстан Ғылым Академиясының негізін қалаушы. Еңбектері: 'Жезқазған кен орны', 'Қазақстанның геологиясы'.", actionText: "🔬 Ғылыми еңбектерін оқу →", actionLink: "https://kk.wikipedia.org/wiki/Қаныш_Сәтбаев" },
+        turar: { avatarImg: "https://i.ibb.co.com/xKqtw6Jh/i-11.webp", name: "Тұрар Рысқұлбеков", years: "1894-1938", bio: "Мемлекет және қоғам қайраткері.", actionText: "📜 Өмірбаяны →", actionLink: "https://kk.wikipedia.org/wiki/Тұрар_Рысқұлбеков" },
+        mukagali: { avatarImg: "https://i.ibb.co.com/LX5gTdLG/Makataev11.png", name: "Мұқағали Мақатаев", years: "1931-1976", bio: "Көрнекті ақын. Өлеңдері: 'Қара сөздер', 'Аққулар ұйықтағанда', 'Қош, махаббат'.", actionText: "📖 Өлеңдерін оқу →", actionLink: "https://kk.wikipedia.org/wiki/Мұқағали_Мақатаев" },
+        mukhtar: { avatarImg: "https://i.ibb.co.com/MxzJMjVJ/i-12.webp", name: "Мұхтар Әуезов", years: "1897-1961", bio: "Қазақ әдебиетінің классигі. Шығармалары: 'Абай жолы' роман-эпопеясы, 'Еңлік-Кебек', 'Қарагөз'.", actionText: "📚 'Абай жолын' оқу →", actionLink: "https://kk.wikipedia.org/wiki/Мұхтар_Әуезов" },
+        oraly: { avatarImg: "https://i.ibb.co.com/VY20qV0b/SUx182-2x-2.webp", name: "Оралхан Бөкей", years: "1943-1993", bio: "Қазақ жазушысы. Шығармалары: 'Қарсы барған керуен', 'Ақсақ киік', 'Қан мен тер'.", actionText: "📖 Шығармаларын оқу →", actionLink: "https://kk.wikipedia.org/wiki/Оралхан_Бөкей" },
+        saken: { avatarImg: "https://i.ibb.co.com/MydmdQkz/i-13.webp", name: "Сәкен Сейфуллин", years: "1894-1938", bio: "Ақын, жазушы, мемлекет қайраткері. Шығармалары: 'Көкшетау', 'Альбатрос', 'Тар жол, тайғақ кешу'.", actionText: "📖 Өлеңдерін оқу →", actionLink: "https://kk.wikipedia.org/wiki/Сәкен_Сейфуллин" },
+        shakarim: { avatarImg: "https://i.ibb.co.com/Fq3sjXDV/i-14.webp", name: "Шәкәрім Құдайбердіұлы", years: "1858-1931", bio: "Ақын, жазушы, философ. Шығармалары: 'Еңлік-Кебек', 'Қалқаман-Мамыр', 'Түрік, қырғыз, қазақ тарихы'.", actionText: "📖 Дастандарын оқу →", actionLink: "https://kk.wikipedia.org/wiki/Шәкәрім_Құдайбердіұлы" }
+    };
+
+    const cityList = [
+        { id: "astana", name: "Астана", region: "Елорда" },
+        { id: "almaty", name: "Алматы", region: "Оңтүстік астана" },
+        { id: "shymkent", name: "Шымкент", region: "Оңтүстік" },
+        { id: "karaganda", name: "Қарағанды", region: "Орталық" },
+        { id: "aktobe", name: "Ақтөбе", region: "Батыс" },
+        { id: "atyrau", name: "Атырау", region: "Батыс" },
+        { id: "semey", name: "Семей", region: "Шығыс" }
+    ];
+
+    const personList = [
+        "abay", "shokan", "ybyray", "kerey", "kenesary", "toke",
+        "akhmet", "azilkhan", "alikhan", "bauyrzhan", "beimbet", "dinmukhamed",
+        "zhussup", "kadyr", "kanysh", "turar", "mukagali", "mukhtar", "oraly", "saken", "shakarim"
+    ];
+
+    function generateCitiesList() {
+        const grid = document.getElementById('citiesGrid');
+        grid.innerHTML = '';
+        cityList.forEach(city => {
+            const card = document.createElement('div');
+            card.className = 'city-card';
+            card.onclick = () => showCityInfo(city.id);
+            card.innerHTML = `<div class="city-name">🏙️ ${city.name}</div><div class="city-region">${city.region}</div>`;
+            grid.appendChild(card);
+        });
+    }
+
+    function generatePersonsList() {
+        const grid = document.getElementById('personsGrid');
+        grid.innerHTML = '';
+        personList.forEach(personId => {
+            const person = personsData[personId];
+            if (person) {
+                const card = document.createElement('div');
+                card.className = 'person-card';
+                card.onclick = () => showPersonModal(personId);
+                
+                let avatarHtml = '';
+                if (person.avatarImg) {
+                    avatarHtml = `<div class="person-avatar"><img src="${person.avatarImg}" alt="${person.name}"></div>`;
+                } else {
+                    avatarHtml = `<div class="person-avatar"><div class="avatar-emoji">👤</div></div>`;
+                }
+                
+                card.innerHTML = `
+                    ${avatarHtml}
+                    <div class="person-name">${person.name}</div>
+                    <div class="person-years">${person.years}</div>
+                    <div class="person-desc">${person.bio.substring(0, 55)}...</div>
+                    <div class="fact-badge">⭐ Ұлы тұлға</div>
+                `;
+                grid.appendChild(card);
+            }
+        });
+    }
+
+    function showCityInfo(id) {
+        const data = citiesData[id];
+        document.getElementById('cityModalTitle').innerHTML = data.name;
+        document.getElementById('cityModalBody').innerHTML = data.info;
+        document.getElementById('cityModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    function closeCityModal() { document.getElementById('cityModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
+    function closeCityModalOnOutside(e) { if (e.target === document.getElementById('cityModal')) closeCityModal(); }
+
+    function showPersonModal(id) {
+        const data = personsData[id];
+        const modalAvatar = document.getElementById('modalAvatar');
+        
+        if (data.avatarImg) {
+            modalAvatar.innerHTML = `<img src="${data.avatarImg}" alt="${data.name}">`;
+        } else {
+            modalAvatar.innerHTML = `<div class="avatar-emoji">👤</div>`;
+        }
+        
+        document.getElementById('modalName').innerHTML = data.name;
+        document.getElementById('modalYears').innerHTML = data.years;
+        document.getElementById('modalBio').innerHTML = data.bio;
+        
+        const actionBtn = document.getElementById('actionBtn');
+        actionBtn.innerHTML = data.actionText;
+        actionBtn.onclick = () => {
+            if (data.actionLink) {
+                window.open(data.actionLink, '_blank');
+            }
+        };
+        
+        document.getElementById('personModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    function closePersonModal() { document.getElementById('personModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
+    function closePersonModalOnOutside(e) { if (e.target === document.getElementById('personModal')) closePersonModal(); }
+
+    // Чат-бот
+    const chatButton = document.getElementById('chatButton');
+    const chatWindow = document.getElementById('chatWindow');
+    const closeChat = document.getElementById('closeChat');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const chatMessages = document.getElementById('chatMessages');
+
+    function addMessage(text, isUser = false) {
+        const div = document.createElement('div');
+        div.className = `message ${isUser ? 'user' : 'bot'}`;
+        div.textContent = text;
+        chatMessages.appendChild(div);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function sendMessage() {
+        const msg = chatInput.value.trim();
+        if (!msg) return;
+        addMessage(msg, true);
+        chatInput.value = '';
+        setTimeout(() => {
+            let response = "Кешіріңіз, мен бұл сұраққа жауап бере алмаймын.";
+            const m = msg.toLowerCase();
+            if (m.includes('сәлем')) response = "Сәлем! Қалайсың? 😊";
+            else if (m.includes('астана')) response = "Астана - Қазақстанның елордасы. 🏙️";
+            else if (m.includes('алматы')) response = "Алматы - оңтүстік астана. 🏔️";
+            else if (m.includes('абай')) response = "Абай Құнанбаев - қазақтың ұлы ақыны. Оның 45 қара сөзі бар. 📖";
+            else response = "Біздің сайтта 21 ұлы тұлға туралы ақпарат бар! Тұлғаның атын жазыңыз.";
+            addMessage(response, false);
+        }, 500);
+    }
+
+    chatButton.onclick = () => chatWindow.classList.toggle('open');
+    closeChat.onclick = () => chatWindow.classList.remove('open');
+    sendBtn.onclick = sendMessage;
+    chatInput.onkeypress = (e) => { if (e.key === 'Enter') sendMessage(); };
+    
+    generateCitiesList();
+    generatePersonsList();
+</script>
+</body>
+</html>

@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Bilim Alemi | Қазақ тілі мен Ұлттық тарих</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Nunito', sans-serif;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 28px;
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes bounce-gentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); }
+            50% { box-shadow: 0 4px 25px rgba(59, 130, 246, 0.7); }
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-bounce-gentle {
+            animation: bounce-gentle 2s ease-in-out infinite;
+        }
+        
+        .hero-section {
+            position: relative;
+            background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=1600');
+            background-size: cover;
+            background-position: center;
+            background-attachment: scroll; /* Мобильді үшін fixed-тен scroll-қа өзгертілді */
+        }
+        
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .video-modal.active {
+            display: flex;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 90%;
+            max-width: 900px;
+            background: black;
+            border-radius: 28px;
+            overflow: hidden;
+        }
+        
+        .video-container iframe {
+            width: 100%;
+            height: 280px;
+        }
+        
+        @media (min-width: 768px) {
+            .video-container iframe {
+                height: 500px;
+            }
+        }
+        
+        .close-video {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: #ef4444;
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        
+        .chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+        
+        @media (min-width: 768px) {
+            .chat-button {
+                bottom: 30px;
+                right: 30px;
+                width: 65px;
+                height: 65px;
+            }
+        }
+        
+        .chat-button:hover {
+            transform: scale(1.1);
+        }
+        
+        .chat-window {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            left: 20px;
+            width: auto;
+            height: 500px;
+            background: white;
+            border-radius: 28px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        @media (min-width: 768px) {
+            .chat-window {
+                bottom: 110px;
+                right: 30px;
+                left: auto;
+                width: 380px;
+            }
+        }
+        
+        .chat-window.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .chat-header {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            padding: 15px 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-avatar {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+        
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            display: inline-block;
+            animation: blink 1.5s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: #f8fafc;
+        }
+        
+        .message {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .message {
+                font-size: 0.9rem;
+                padding: 12px 16px;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .message.user {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .message.bot {
+            background: #e2e8f0;
+            color: #1e293b;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .chat-input-container {
+            padding: 12px 15px;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input-container input {
+            flex: 1;
+            padding: 10px 14px;
+            border: 1px solid #e2e8f0;
+            border-radius: 50px;
+            outline: none;
+            font-size: 0.9rem;
+        }
+        
+        .chat-input-container input:focus {
+            border-color: #3b82f6;
+        }
+        
+        .send-btn {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+        
+        .send-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .profile-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        
+        @media (min-width: 768px) {
+            .profile-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.5rem;
+            }
+        }
+
+        .profile-icon:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            width: 180px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+            border: 1px solid #e2e8f0;
+        }
+        
+        @media (min-width: 768px) {
+            .dropdown-menu {
+                width: 200px;
+                top: 55px;
+            }
+        }
+
+        .profile-dropdown:hover .dropdown-menu,
+        .profile-dropdown:focus-within .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            color: #1e293b;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        @media (min-width: 768px) {
+            .dropdown-menu a {
+                padding: 12px 20px;
+                gap: 12px;
+            }
+        }
+
+        .dropdown-menu a:hover {
+            background: #f1f5f9;
+            color: #3b82f6;
+        }
+
+        .dropdown-menu hr {
+            margin: 5px 0;
+            border-color: #e2e8f0;
+        }
+        
+        .file-card, .video-card {
+            background: white;
+            border-radius: 24px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+        }
+        
+        @media (min-width: 768px) {
+            .file-card, .video-card {
+                padding: 20px;
+            }
+        }
+        
+        .file-card:hover, .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: #3b82f6;
+        }
+        
+        /* Мобильді навигация түймелері үлкенірек */
+        @media (max-width: 768px) {
+            .nav-links-mobile {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+            .nav-links-mobile a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+            }
+        }
+        
+        .close-chat {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .close-chat:hover {
+            background: #ef4444;
+        }
+        
+        /* Hero секциясы мобильді үшін */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 60px 20px;
+            }
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            .hero-section p {
+                font-size: 1rem;
+            }
+            .glass-card {
+                padding: 20px;
+            }
+            .glass-card .text-5xl {
+                font-size: 2.5rem;
+            }
+            .glass-card h3 {
+                font-size: 1.1rem;
+            }
+            .glass-card p {
+                font-size: 0.8rem;
+            }
+            footer .grid {
+                gap: 1.5rem;
+            }
+            footer h3, footer h4 {
+                font-size: 1rem;
+            }
+            footer ul li a {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-50">
+
+<!-- Навигация -->
+<nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center flex-wrap gap-3">
+        <a href="index.html" class="text-xl md:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+            🎓 Bilim Alemi
+        </a>
+        <div class="hidden md:flex gap-6">
+            <a href="index.html" class="font-semibold text-blue-600 border-b-2 border-blue-600 pb-1">Басты бет</a>
+            <a href="kazak_tili.html" class="font-medium text-gray-600 hover:text-blue-600 transition">Қазақ тілі</a>
+            <a href="tarih.html" class="font-medium text-gray-600 hover:text-blue-600 transition">Ұлттық тарих</a>
+            <a href="game.html" class="font-medium text-gray-600 hover:text-blue-600 transition">Ойындар</a>
+            <a href="test.html" class="font-medium text-gray-600 hover:text-blue-600 transition">📝 ҰБТ тест</a>
+            <a href="about.html" class="font-medium text-gray-600 hover:text-blue-600 transition">📖 Біз туралы</a>
+        </div>
+        
+        <!-- Мобильді навигация (кіші экранда көрінеді) -->
+        <div class="flex md:hidden flex-wrap gap-2 order-3 w-full justify-center mt-2">
+            <a href="index.html" class="text-sm font-semibold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">Басты бет</a>
+            <a href="kazak_tili.html" class="text-sm text-gray-600 bg-gray-50 px-3 py-1 rounded-full hover:bg-blue-50 transition">Қазақ тілі</a>
+            <a href="tarih.html" class="text-sm text-gray-600 bg-gray-50 px-3 py-1 rounded-full hover:bg-blue-50 transition">Ұлттық тарих</a>
+            <a href="game.html" class="text-sm text-gray-600 bg-gray-50 px-3 py-1 rounded-full hover:bg-blue-50 transition">Ойындар</a>
+            <a href="test.html" class="text-sm text-gray-600 bg-gray-50 px-3 py-1 rounded-full hover:bg-blue-50 transition">📝 ҰБТ тест</a>
+            <a href="about.html" class="text-sm text-gray-600 bg-gray-50 px-3 py-1 rounded-full hover:bg-blue-50 transition">📖 Біз туралы</a>
+        </div>
+        
+        <div class="profile-dropdown">
+            <div class="profile-icon">👤</div>
+            <div class="dropdown-menu">
+                <a href="profile.html">👤 Жеке кабинет</a>
+                <a href="contact.html">📞 Байланыс</a>
+                <hr>
+                <a href="login.html">🔐 Кіру</a>
+                <a href="register.html">📝 Тіркелу</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero секциясы -->
+<section class="hero-section py-16 md:py-32">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1 md:px-4 md:py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs md:text-sm font-medium mb-4 md:mb-6">
+            🎓 Қазақ тілі мен тарихы
+        </div>
+        <h1 class="text-3xl md:text-7xl font-black text-white mb-4 md:mb-6">
+            Білім әлеміне <br>
+            <span class="text-gradient bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text">қош келдің!</span>
+        </h1>
+        <p class="text-base md:text-xl text-white/90 max-w-2xl mx-auto mb-6 md:mb-10">
+            Қазақ тілін үйреніп, ұлтымыздың бай тарихымен таныс. Интерактивті ойындар, тесттер және бейнесабақтар арқылы біліміңді шыңда.
+        </p>
+        <div class="flex gap-3 md:gap-4 justify-center flex-wrap">
+            <a href="kazak_tili.html" class="px-5 py-2.5 md:px-8 md:py-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold hover:scale-105 transition shadow-lg shadow-blue-500/25 text-sm md:text-base">
+                🚀 Бастау
+            </a>
+            <a href="game.html" class="px-5 py-2.5 md:px-8 md:py-4 rounded-full bg-white/20 backdrop-blur-sm text-white font-bold border border-white/30 hover:bg-white/30 transition text-sm md:text-base">
+                🎮 Ойындар
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Оқу материалдары -->
+<section class="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
+    <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-3 md:mb-4">📁 Оқу материалдары</h2>
+    <p class="text-center text-gray-600 mb-8 md:mb-12 text-sm md:text-base">Презентациялар мен қосымша материалдар</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6" id="filesGrid"></div>
+</section>
+
+<!-- Бейнесабақтар -->
+<section class="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
+    <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-3 md:mb-4">🎥 Бейнесабақтар</h2>
+    <p class="text-center text-gray-600 mb-8 md:mb-12 text-sm md:text-base">Қазақстан тарихы мен әдебиеті бойынша бейнесабақтар</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6" id="videoGrid"></div>
+</section>
+
+<!-- Қызықты деректер -->
+<section class="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
+    <div class="glass-card p-6 md:p-8">
+        <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-6">📜 Қызықты тарихи деректер</h2>
+        <div id="historyFact" class="text-center">
+            <h3 class="text-lg md:text-xl font-bold text-blue-600 mb-3">🏺 Сақтар дәуірі</h3>
+            <p class="text-gray-600 text-sm md:text-base">Сақтар темір дәуірінде өмір сүрген көшпелі тайпалар. Олардың ең танымалы - "Алтын адам" (Қазақстанның ұлттық рәмізі).</p>
+        </div>
+        <div class="text-center mt-6">
+            <button onclick="changeHistoryFact()" class="px-5 py-2 md:px-6 md:py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium hover:scale-105 transition text-sm md:text-base">
+                🔄 Келесі дерек
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Білім бөлімдері -->
+<section class="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <a href="kazak_tili.html" class="glass-card p-6 md:p-8 text-center group">
+            <div class="text-4xl md:text-5xl mb-3 md:mb-4 animate-bounce-gentle">📚</div>
+            <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition">Қазақ тілі</h3>
+            <p class="text-gray-500 text-xs md:text-sm">Әліппе, сандар, мақал-мәтелдер, ертегілер</p>
+        </a>
+        <a href="tarih.html" class="glass-card p-6 md:p-8 text-center group">
+            <div class="text-4xl md:text-5xl mb-3 md:mb-4 animate-bounce-gentle">🏛️</div>
+            <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition">Ұлттық тарих</h3>
+            <p class="text-gray-500 text-xs md:text-sm">Қазақ хандығы, ұлы тұлғалар, қалалар</p>
+        </a>
+        <a href="game.html" class="glass-card p-6 md:p-8 text-center group">
+            <div class="text-4xl md:text-5xl mb-3 md:mb-4 animate-bounce-gentle">🎮</div>
+            <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition">Ойындар</h3>
+            <p class="text-gray-500 text-xs md:text-sm">Интеллектуалды ойындар мен тесттер</p>
+        </a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-8 md:py-12 mt-16">
+    <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            <div>
+                <h3 class="text-base md:text-xl font-bold mb-3 md:mb-4">🎓 Bilim Alemi</h3>
+                <p class="text-gray-400 text-xs md:text-sm">Қазақ тілі мен ұлттық тарихты оқытуға арналған интерактивті платформа.</p>
+            </div>
+            <div>
+                <h4 class="text-sm md:text-base font-bold mb-3 md:mb-4">Сілтемелер</h4>
+                <ul class="space-y-1 md:space-y-2 text-gray-400 text-xs md:text-sm">
+                    <li><a href="index.html" class="hover:text-white transition">Басты бет</a></li>
+                    <li><a href="kazak_tili.html" class="hover:text-white transition">Қазақ тілі</a></li>
+                    <li><a href="tarih.html" class="hover:text-white transition">Ұлттық тарих</a></li>
+                    <li><a href="game.html" class="hover:text-white transition">Ойындар</a></li>
+                    <li><a href="test.html" class="hover:text-white transition">ҰБТ тест</a></li>
+                    <li><a href="about.html" class="hover:text-white transition">Біз туралы</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm md:text-base font-bold mb-3 md:mb-4">Аккаунт</h4>
+                <ul class="space-y-1 md:space-y-2 text-gray-400 text-xs md:text-sm">
+                    <li><a href="profile.html" class="hover:text-white transition">Жеке кабинет</a></li>
+                    <li><a href="login.html" class="hover:text-white transition">Кіру</a></li>
+                    <li><a href="register.html" class="hover:text-white transition">Тіркелу</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm md:text-base font-bold mb-3 md:mb-4">Байланыс</h4>
+                <ul class="space-y-1 md:space-y-2 text-gray-400 text-xs md:text-sm">
+                    <li><a href="contact.html" class="hover:text-white transition">📞 Байланыс</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-6 md:mt-8 pt-6 md:pt-8 text-center text-gray-500 text-xs md:text-sm">
+            <p>© 2026 Bilim Alemi. Барлық құқықтар қорғалған.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Чат-бот -->
+<div class="chat-button" id="chatButton">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2z"/>
+    </svg>
+</div>
+
+<div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+        <div class="flex items-center gap-2 md:gap-3">
+            <div class="chat-avatar">🤖</div>
+            <div>
+                <h3 class="font-bold text-sm md:text-base">Bilim Bot</h3>
+                <p class="text-xs opacity-80"><span class="online-dot"></span> Онлайн</p>
+            </div>
+        </div>
+        <button class="close-chat" id="closeChat">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+        <div class="message bot">Сәлем! Мен Bilim Bot. Сұрақтарыңа жауап беремін 😊</div>
+    </div>
+    <div class="chat-input-container">
+        <input type="text" id="chatInput" placeholder="Сұрағыңызды жазыңыз...">
+        <button class="send-btn" id="sendBtn">📨</button>
+    </div>
+</div>
+
+<script>
+    const files = [
+        { icon: "📘", title: "Қазақ тілі презентациясы", size: "2.5 MB", link: "https://docs.google.com/presentation/d/1-sample/edit" },
+        { icon: "📗", title: "Қазақстан тарихы презентациясы", size: "3.1 MB", link: "https://docs.google.com/presentation/d/2-sample/edit" },
+        { icon: "📜", title: "Алаш қозғалысы тарихы", size: "1.2 MB", link: "https://docs.google.com/document/d/18FCgu_C-xwk5MYTupNsQOMwTMXepHgPX/edit" },
+        { icon: "📙", title: "Қазақстан тарихы анықтамасы", size: "1.8 MB", link: "https://drive.google.com/file/d/1EqylZcp8Tt7ccAvJVRx5cndtaYtJI9QG/view?usp=sharing" }
+    ];
+
+    const videos = [
+        { title: " Қазақстан тарихы 9 минутта", desc: "Қазақстан тарихының негізгі кезеңдері", url: "https://youtu.be/igklIWKqto0" },
+        { title: " Қазақ хандығының құрылуы", desc: "Керей мен Жәнібек хандар", url: "https://youtu.be/4295QBt0hpg" },
+        { title: " Абай Құнанбаев - Ұлы ақын", desc: "Абайдың өмірі мен шығармашылығы", url: "https://youtu.be/6YMa3tgNTtc" },
+        { title: " Қазақстан тарихы 9 сынып", desc: "9-сыныпқа арналған бейнесабақ", url: "https://youtu.be/--ldfm8ASy4" }
+    ];
+
+    function generateFilesGrid() {
+        const grid = document.getElementById('filesGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        files.forEach(file => {
+            const card = document.createElement('div');
+            card.className = 'file-card';
+            card.innerHTML = `
+                <div class="text-3xl md:text-4xl mb-2 md:mb-3">${file.icon}</div>
+                <h3 class="font-bold text-gray-900 mb-1 text-sm md:text-base">${file.title}</h3>
+                <p class="text-xs text-gray-500 mb-3 md:mb-4">📏 ${file.size}</p>
+                <a href="${file.link}" class="inline-block px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs md:text-sm font-medium hover:scale-105 transition" target="_blank">📥 Көру / Жүктеу</a>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    function generateVideosGrid() {
+        const grid = document.getElementById('videoGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        videos.forEach(video => {
+            const card = document.createElement('div');
+            card.className = 'video-card';
+            card.onclick = () => window.open(video.url, '_blank');
+            card.innerHTML = `
+                <div class="text-4xl md:text-5xl mb-3 md:mb-4 text-center">🎬</div>
+                <h3 class="font-bold text-gray-900 mb-1 text-sm md:text-base">${video.title}</h3>
+                <p class="text-gray-500 text-xs md:text-sm">${video.desc}</p>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    const historyFacts = [
+        { title: "🏺 Сақтар дәуірі", desc: "Сақтар темір дәуірінде өмір сүрген көшпелі тайпалар. Олардың ең танымалы - 'Алтын адам' (Қазақстанның ұлттық рәмізі)." },
+        { title: "🏔️ Түркі қағанаты", desc: "Түркі қағанаты - VI-VIII ғасырлардағы ұлы көшпелі империя. Орхон-Енисей жазбалары - түркілердің алғашқы әліпбиі." },
+        { title: "👑 Қазақ хандығы", desc: "Керей мен Жәнібек хандар 1465 жылы Қазақ хандығын құрды. Қасым ханның тұсында хандық өзінің ең жоғары шарықтау шегіне жетті." },
+        { title: "📚 Абай Құнанбаев", desc: "Абай - қазақтың ұлы ақыны, ағартушы. Оның 'Қара сөздері' 45 нақыл сөзден тұрады." },
+        { title: "⭐ Тәуелсіздік", desc: "1991 жылғы 16 желтоқсан - Қазақстан Республикасының тәуелсіздік күні." }
+    ];
+    
+    let factIndex = 0;
+    
+    function changeHistoryFact() {
+        factIndex = (factIndex + 1) % historyFacts.length;
+        const fact = historyFacts[factIndex];
+        const historyDiv = document.getElementById('historyFact');
+        if (historyDiv) {
+            historyDiv.innerHTML = `
+                <h3 class="text-lg md:text-xl font-bold text-blue-600 mb-3">${fact.title}</h3>
+                <p class="text-gray-600 text-sm md:text-base">${fact.desc}</p>
+            `;
+        }
+    }
+
+    // Чат-бот
+    const chatButton = document.getElementById('chatButton');
+    const chatWindow = document.getElementById('chatWindow');
+    const closeChat = document.getElementById('closeChat');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const chatMessages = document.getElementById('chatMessages');
+
+    function addMessage(text, isUser = false) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+        messageDiv.textContent = text;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function getBotResponse(msg) {
+        if (msg.includes('сәлем') || msg.includes('салем')) return "Сәлем! Қалайсың? Мен көмектесейін 😊";
+        if (msg.includes('қазақ тілі')) return "Қазақ тілі - қазақ халқының ана тілі. Біздің сайтта әліппе, сандар, мақал-мәтелдер, ертегілер бар. 📚";
+        if (msg.includes('тарих')) return "Қазақстан тарихы бай және қызықты! Сақтар, түркі қағанаты, қазақ хандығы туралы ақпараттар бар. 🏛️";
+        if (msg.includes('ойын')) return "Бізде интеллектуалды ойын бар! 4 түрлі режим, уақыт шектеуі, ұпай есептеу жүйесі. 🎮";
+        if (msg.includes('абай')) return "Абай Құнанбаев - қазақтың ұлы ақыны, ағартушы, философ. Оның 45 қара сөзі бар. 📖";
+        if (msg.includes('рахмет')) return "Оқасы жоқ! Көмектескеніме қуаныштымын 🤗";
+        if (msg.includes('профиль') || msg.includes('кабинет')) return "Жеке кабинетке өту үшін жоғарғы оң жақтағы 👤 иконкасын басыңыз!";
+        return "Кешіріңіз, мен бұл сұраққа әлі жауап бере алмаймын. 'Көмек' сөзін жазыңыз!";
+    }
+
+    function sendMessage() {
+        const message = chatInput.value.trim();
+        if (message === "") return;
+        addMessage(message, true);
+        chatInput.value = "";
+        setTimeout(() => {
+            const response = getBotResponse(message.toLowerCase());
+            addMessage(response, false);
+        }, 500);
+    }
+
+    if (chatButton) chatButton.onclick = () => chatWindow.classList.toggle('open');
+    if (closeChat) closeChat.onclick = () => chatWindow.classList.remove('open');
+    if (sendBtn) sendBtn.onclick = sendMessage;
+    if (chatInput) chatInput.onkeypress = (e) => { if (e.key === 'Enter') sendMessage(); };
+
+    generateFilesGrid();
+    generateVideosGrid();
+</script>
+
+</body>
+</html>
